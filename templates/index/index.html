@@ -3,63 +3,236 @@
 {% load static %}
 
 {% block content %}
-    <div class="container mt-5 pt-5">
+    <!------ Include the above in your HEAD tag ---------->
+
+    <div class="container pt-5 mt-5 text-center">
         <div class="row">
             <div class="col-12">
                 <div class="card mt-3 tab-card">
-                    <div class="card-header tab-card-header">
-                        <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link" id="one-tab" data-toggle="tab" href="#one" role="tab"
-                                   aria-controls="One" aria-selected="true">Sorular</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="two-tab" data-toggle="tab" href="#two" role="tab"
-                                   aria-controls="Two" aria-selected="false">Müfredat</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active p-3" id="one" role="tabpanel" aria-labelledby="one-tab">
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the card's content.</p>
+                    {% if default_degerler %}
+                        <div class="card-header tab-card-header ">
+                            <ul class="nav nav-tabs card-header-tabs " id="myTab" role="tablist">
 
+                                {% if default_degerler.yasin %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="one-tab" data-toggle="tab" href="#yasin" role="tab"
+                                           aria-controls="One" aria-selected="true">Yasin</a>
+                                    </li>
+                                {% endif %}
+                                {% if default_degerler.mulk %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="one-tab" data-toggle="tab" href="#mulk" role="tab"
+                                           aria-controls="One" aria-selected="true">Mülk</a>
+                                    </li>
+                                {% endif %}
+                                {% if default_degerler.nebe %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="one-tab" data-toggle="tab" href="#nebe" role="tab"
+                                           aria-controls="One" aria-selected="true">Nebe</a>
+                                    </li>
+                                {% endif %}
+                            </ul>
                         </div>
-                        <div class="tab-pane fade p-3" id="two" role="tabpanel" aria-labelledby="two-tab">
-                            <p class="card-text">
-                                <!-- ================ contact section start ================= -->
-                                <section class="contact-section">
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <h2 class="contact-title">Müfredat Formu</h2>
-                                            </div>
-                                            <div class="col-lg-12">
-                                                <form class="form-contact mr-2 ml-2 pl-2 pr-2" method="POST"
-                                                      enctype="multipart/form-data">
-                                                    {% csrf_token %}
-                                                    {{ form.media }}
-                                                    {{ form | crispy }}
-                                                    <hr>
-                                                    <div class="form-group mt-3">
-                                                        <button type="submit" class="btn btn-primary">Kaydet</button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
+                    {% endif %}
+                    <div class="tab-content" id="myTabContent">
+                        {% if default_degerler.yasin %}
+                            <div class="tab-pane fade show active p-3" id="yasin" role="tabpanel"
+                                 aria-labelledby="one-tab">
+                                <h5 class="card-title">Tab Card One</h5>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Başlangıç</span>
                                     </div>
-                                </section>
-                                <!-- ================ contact section end ================= -->
-                            </p>
-                        </div>
+                                    <input type="text" class="form-control mr-1" id="giris1" placeholder=""
+                                           aria-label="Username"
+                                           aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control ml-1" id="giris2"
+                                           aria-label="Amount (to the nearest dollar)">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">Bitiş</span>
+                                    </div>
+
+                                    <a href="{% url 'randomsoru' 1 %}" class="btn btn-primary">Go somewhere</a>
+                                </div>
+                            </div>
+                        {% endif %}
+                        {% if default_degerler.mulk %}
+                            <div class="tab-pane fade p-3" id="mulk" role="tabpanel" aria-labelledby="two-tab">
+                                <h5 class="card-title">Tab Card Two</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the
+                                    bulk
+                                    of the card's content.</p>
+                                <a href="{% url 'randomsoru' 1 %}" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        {% endif %}
+                        {% if default_degerler.nebe %}
+                            <div class="tab-pane fade p-3" id="nebe" role="tabpanel" aria-labelledby="three-tab">
+                                <h5 class="card-title">Tab Card Three</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the
+                                    bulk
+                                    of the card's content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        {% endif %}
+
 
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="card mt-3 tab-card">
+                    {% if default_degerler %}
+                        <div class="card-header tab-card-header">
+                            <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                                {% if default_degerler.igra %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="one-tab" data-toggle="tab" href="#igra" role="tab"
+                                           aria-controls="One" aria-selected="true">İgra</a>
+                                    </li>
+                                {% endif %}
+                                {% if default_degerler.beyyine %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="one-tab" data-toggle="tab" href="#beyyine" role="tab"
+                                           aria-controls="One" aria-selected="true">Beyyine</a>
+                                    </li>
+                                {% endif %}
+                                {% if default_degerler.duha_alti %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="one-tab" data-toggle="tab" href="#duha_alti" role="tab"
+                                           aria-controls="One" aria-selected="true">Duha Altı</a>
+                                    </li>
+                                {% endif %}
+                                {% if default_degerler.fil_alti %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="one-tab" data-toggle="tab" href="#fil_alti" role="tab"
+                                           aria-controls="One" aria-selected="true">Fil Altı</a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    {% endif %}
 
+                    <div class="tab-content" id="myTabContent">
+                        {% if default_degerler.igra %}
+                            <div class="tab-pane fade p-3" id="igra" role="tabpanel" aria-labelledby="three-tab">
+                                <h5 class="card-title">Tab Card Three</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the
+                                    bulk
+                                    of the card's content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        {% endif %}
+                        {% if default_degerler.beyyine %}
+                            <div class="tab-pane fade p-3" id="beyyine" role="tabpanel" aria-labelledby="three-tab">
+                                <h5 class="card-title">Tab Card Three</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the
+                                    bulk
+                                    of the card's content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        {% endif %}
+                        {% if default_degerler.duha_alti %}
+                            <div class="tab-pane fade p-3" id="duha_alti" role="tabpanel" aria-labelledby="three-tab">
+                                <h5 class="card-title">Tab Card Three</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the
+                                    bulk
+                                    of the card's content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        {% endif %}
+                        {% if default_degerler.fil_alti %}
+                            <div class="tab-pane fade p-3" id="fil_alti" role="tabpanel" aria-labelledby="three-tab">
+                                <h5 class="card-title">Tab Card Three</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the
+                                    bulk
+                                    of the card's content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        {% endif %}
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container pb-5 mb-5">
+        <div class="row">
+            <div class="col-12">
+                <div class="card tab-card">
+                    {% if default_degerler %}
+                        <div class="card-header tab-card-header">
+                            <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
+                                {% if default_degerler.tecvid %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="one-tab" data-toggle="tab" href="#tecvid" role="tab"
+                                           aria-controls="One" aria-selected="true">Tecvid</a>
+                                    </li>
+                                {% endif %}
+                                {% if default_degerler.siyer %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="one-tab" data-toggle="tab" href="#siyer" role="tab"
+                                           aria-controls="One" aria-selected="true">Siyer</a>
+                                    </li>
+                                {% endif %}
+                                {% if default_degerler.p_arapca %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="one-tab" data-toggle="tab" href="#p_arapca" role="tab"
+                                           aria-controls="One" aria-selected="true">Pratik Arapça</a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    {% endif %}
+
+                    <div class="tab-content" id="myTabContent">
+                        {% if default_degerler.tecvid %}
+                            <div class="tab-pane fade p-3" id="tecvid" role="tabpanel" aria-labelledby="three-tab">
+                                <h5 class="card-title">Tab Card Three</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the
+                                    bulk
+                                    of the card's content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        {% endif %}
+                        {% if default_degerler.siyer %}
+                            <div class="tab-pane fade p-3" id="siyer" role="tabpanel" aria-labelledby="three-tab">
+                                <h5 class="card-title">Tab Card Three</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the
+                                    bulk
+                                    of the card's content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        {% endif %}
+                        {% if default_degerler.p_arapca %}
+                            <div class="tab-pane fade p-3" id="p_arapca" role="tabpanel" aria-labelledby="three-tab">
+                                <h5 class="card-title">Tab Card Three</h5>
+                                <p class="card-text">Some quick example text to build on the card title and make up the
+                                    bulk
+                                    of the card's content.</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        {% endif %}
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <style>
+        /***
+    Bootstrap4 Card with Tabs by @mdeuerlein
+    ***/
+
+        body {
+            background-color: #f7f8f9;
+        }
+
         .card {
             background-color: #ffffff;
             border: 1px solid rgba(0, 34, 51, 0.1);
@@ -108,5 +281,7 @@
             padding-bottom: 0;
         }
     </style>
+
+
 
 {% endblock %}

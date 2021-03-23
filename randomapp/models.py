@@ -164,10 +164,12 @@ class s_ezber(models.Model):
 
 
 class DefaultDegerler(models.Model):
-    kk_sayfa_ilk = models.SmallIntegerField("Başlangıç")
-    kk_sayfa_son = models.SmallIntegerField("Bitiş")
+    kk_sayfa_ilk = models.SmallIntegerField("Başlangıç", default=0)
+    kk_sayfa_son = models.SmallIntegerField("Bitiş", default=604)
     ilmihal_ilk = models.SmallIntegerField("Başlangıç")
     ilmihal_son = models.SmallIntegerField("Bitiş")
+    yasin_ilk = models.SmallIntegerField("Başlangıç", default=1)
+    yasin_son = models.SmallIntegerField("Bitiş", default=6)
     yasin = models.CharField(max_length=25,
                              choices=MESSAGE_STATUS,
                              default='var',
