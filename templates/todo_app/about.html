@@ -1,0 +1,21 @@
+{% extends 'todo_app/base.html' %}
+{% block title %}
+ABOUT PAGE
+{% endblock title %}
+
+{% block content %}
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4"><center>TO-DO LIST</center></h1>
+    <p class="lead"><center>My To-Do list. Made with Django</center></p>
+    <p class="lead"><center>Görevlerini listeye ekle</center></p>
+    <p class="lead"><center>Yaptıklarının üstünü çiz</center></p>
+    <p class="lead"><center>İstersen silebilirsin veya güncelleyebilirsin</center></p>
+    <div class="text-center">
+        <a href="{% url 'create' %}">
+        <button type="button" class="btn btn-outline-success">Create To-Do List</button>
+        </a>
+    </div>
+  </div>
+</div>
+{% endblock content %}

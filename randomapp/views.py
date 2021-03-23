@@ -1,12 +1,33 @@
 from django.shortcuts import render, redirect
 from .forms import Mufredat
-from .models import Kullanicilar, DefaultDegerler, KURANIKERIM
+from .models import Kullanicilar, DefaultDegerler, KURANIKERIM, siyer
 
 
-def index(request):
+def index(request, randomsoru=0):
     context = dict()
     context['default_degerler'] = DefaultDegerler.objects.last()
-
+    if randomsoru == 1:
+        context['yasin_random'] = KURANIKERIM.objects.filter(sure_isim='يٰسۤ').order_by('?')[0].ayet
+        context['sure_isim'] = 'يٰسۤ'
+    elif randomsoru == 2:
+        return  # mulk
+    elif randomsoru == 3:
+        return  # nebe
+    elif randomsoru == 4:
+        return  # igra
+    elif randomsoru == 5:
+        return  # beyyine
+    elif randomsoru == 6:
+        return  # duha_alti
+    elif randomsoru == 7:
+        return  # fil_alti
+    elif randomsoru == 8:
+        return  # tecvid
+    elif randomsoru == 9:
+        
+        context['siyer_random'] = siyer.objects.order_by('?')[0]
+    elif randomsoru == 10:
+        return  # p_arapca
     session = request.session.session_key
     if request.method == 'POST':
         form = Mufredat(request.POST)
@@ -24,8 +45,10 @@ def index(request):
 
 
 def randomsoru(request, randomsoru):
+    context = dict()
     if randomsoru == 1:
-        return print('Yasin Suresi')  # yasin
+        context['yasin_random'] = KURANIKERIM.objects.filter(sure_isim='يٰسۤ').order_by('?')[0].ayet
+        context['sure_isim'] = 'يٰسۤ'
     elif randomsoru == 2:
         return  # mulk
     elif randomsoru == 3:
@@ -45,4 +68,4 @@ def randomsoru(request, randomsoru):
     elif randomsoru == 10:
         return  # p_arapca
 
-    return render(request, 'index/index.html')
+    return redirect(request, 'index/random.html', context)

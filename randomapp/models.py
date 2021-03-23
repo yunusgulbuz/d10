@@ -100,6 +100,7 @@ class ilmihal(models.Model):
 
 class siyer(models.Model):
     soru = models.TextField(max_length=600, blank=False)
+    sayfa = models.SmallIntegerField(blank=True,default=0)
     aciklama = models.CharField(max_length=255, blank=True)
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)

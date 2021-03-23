@@ -1,0 +1,64 @@
+{% extends 'todo_app/base.html' %}
+{% block title %}
+HOME PAGE
+{% endblock title %}
+{% block content %}
+{% spaceless %}
+
+{% endspaceless %}
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4"><center>TO-DO LIST</center></h1>
+    <p class="lead"><center>My To-Do list. Made with Django</center></p>
+    <div class="text-center">
+        <a href="{% url 'create' %}">
+        <button type="button" class="btn btn-outline-success">Create To-Do List</button>
+        </a>
+    </div>
+  </div>
+</div>
+<div class="container">
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">To-Do List</th>
+      <th scope="col">Is Finished?</th>
+      <th scope="col">Date and Time</th>
+      <th scope="col">Delete</th>
+      <th scope="col">Update</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if todoList %}
+    
+      {% for todo in todoList %}
+       {% comment %} {{ forloop.parentloop }}
+       {{todoList | length}}
+        {% ifchanged todo.date|date:"h" %}
+            {% cycle "red" "blue" %}
+        {% else %}
+            gray
+        {% endifchanged %} {% endcomment %}
+        {% if todo.finished == False %}
+          <tr>
+            <td>{{todo.title}}</td>
+            <td><a class="btn btn-danger" href="{% url 'noFinished' todo.id %}" role="button">No</a></td> 
+            <td>{{todo.date}}</td>
+            <td><a class="btn btn-danger" href="{% url 'delete' todo.id %}" role="button">Delete</a></td> 
+            <td><a type="button" class="btn btn-warning" href="{% url 'update' todo.id %}">Update</a></td>
+          </tr>
+        {% else %}
+          <tr>
+            <td><del>{{todo.title}}</del></td>
+            <td><a class="btn btn-success" href="{% url 'yesFinished' todo.id %}" role="button">Yes</a></td> 
+            <td>{{todo.date}}</td>
+            <td><a class="btn btn-danger" href="{% url 'delete' todo.id %}">Delete</a></td>
+            <td><a type="button" class="btn btn-warning" href="{% url 'update' todo.id %}">Update</a></td>
+          </tr>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  </tbody>
+</table>
+</div>
+{% endblock content %}

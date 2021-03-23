@@ -1,0 +1,57 @@
+{% extends 'todo_app/base.html' %}
+{% block title %}
+UPDATE PAGE
+{% endblock title %}
+{% block content %}
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4"><center>TO-DO LIST</center></h1>
+    <p class="lead"><center>My To-Do list. Made with Django</center></p>
+    <form class="container" method="POST">
+    {% csrf_token %}
+  <div class="form-group row">
+    <label for="inputEmail3" class="col-sm-2 col-form-label">To-Do Title</label>
+    <div class="col-sm-10">
+    {% if todo %}
+        <input type="text" class="form-control" id="inputEmail3" name="title" placeholder="{{ todo.title }}">
+    {% endif %}
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inputPassword3" class="col-sm-2 col-form-label">Description</label>
+    <div class="col-sm-10">
+    {% if todo %}
+        <input type="text" class="form-control" id="inputPassword3" name="description" placeholder="{{ todo.description }}">
+    {% endif %}
+    </div>
+  </div>
+  
+  <div class="form-group row">
+    <div class="col-sm-2">Is Finished?</div>
+    <div class="col-sm-10">
+      <div class="form-check">
+      {% if todo %}
+        {% if todo.finished %}
+            <input class="form-check-input" type="checkbox" id="gridCheck1" name="finished" checked>
+        {% else %}
+            <input class="form-check-input" type="checkbox" id="gridCheck1" name="finished">
+        {% endif %}
+      {% endif %}
+        
+        <label class="form-check-label">
+          Yes
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="form-group row">
+    <div class="col-sm-10">
+      <button type="submit" class="btn btn-success">Update To-Do</button>
+    </div>
+  </div>
+</form>
+  </div>
+</div>
+
+{% endblock content %}
+

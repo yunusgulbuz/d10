@@ -5,40 +5,103 @@
 {% block content %}
     <!------ Include the above in your HEAD tag ---------->
 
-    <div class="container pt-5 mt-5 text-center">
-        <div class="row">
-            <div class="col-12">
+    <div class="container text-center">
+        <div class="row mt-5">
+            <div class="col-12 mt-5">
                 <div class="card mt-3 tab-card">
                     {% if default_degerler %}
                         <div class="card-header tab-card-header ">
                             <ul class="nav nav-tabs card-header-tabs " id="myTab" role="tablist">
 
-                                {% if default_degerler.yasin %}
+                                {% if default_degerler.yasin == 'var' %}
                                     <li class="nav-item">
                                         <a class="nav-link" id="one-tab" data-toggle="tab" href="#yasin" role="tab"
                                            aria-controls="One" aria-selected="true">Yasin</a>
                                     </li>
                                 {% endif %}
-                                {% if default_degerler.mulk %}
+                                {% if default_degerler.mulk == 'var' %}
                                     <li class="nav-item">
                                         <a class="nav-link" id="one-tab" data-toggle="tab" href="#mulk" role="tab"
                                            aria-controls="One" aria-selected="true">Mülk</a>
                                     </li>
                                 {% endif %}
-                                {% if default_degerler.nebe %}
+                                {% if default_degerler.nebe == 'var'%}
                                     <li class="nav-item">
                                         <a class="nav-link" id="one-tab" data-toggle="tab" href="#nebe" role="tab"
                                            aria-controls="One" aria-selected="true">Nebe</a>
                                     </li>
                                 {% endif %}
+                                {% if default_degerler.igra == 'var'%}
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="one-tab" data-toggle="tab" href="#igra" role="tab"
+                                           aria-controls="One" aria-selected="true">İgra</a>
+                                    </li>
+                                {% endif %}
+                                {% if default_degerler.beyyine == 'var'%}
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="one-tab" data-toggle="tab" href="#beyyine" role="tab"
+                                           aria-controls="One" aria-selected="true">Beyyine</a>
+                                    </li>
+                                {% endif %}
+                                {% if default_degerler.duha_alti == 'var'%}
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="one-tab" data-toggle="tab" href="#duha_alti" role="tab"
+                                           aria-controls="One" aria-selected="true">Duha Altı</a>
+                                    </li>
+                                {% endif %}
+                                {% if default_degerler.fil_alti == 'var' %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="one-tab" data-toggle="tab" href="#fil_alti" role="tab"
+                                           aria-controls="One" aria-selected="true">Fil Altı</a>
+                                    </li>
+                                {% endif %}
+                                {% if default_degerler.tecvid == 'var' %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="one-tab" data-toggle="tab" href="#tecvid" role="tab"
+                                           aria-controls="One" aria-selected="true">Tecvid</a>
+                                    </li>
+                                {% endif %}
+                                {% if default_degerler.siyer == 'var' %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="one-tab" data-toggle="tab" href="#siyer" role="tab"
+                                           aria-controls="One" aria-selected="true">Siyer</a>
+                                    </li>
+                                {% endif %}
+                                {% if default_degerler.p_arapca == 'var' %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="one-tab" data-toggle="tab" href="#p_arapca" role="tab"
+                                           aria-controls="One" aria-selected="true">Pratik Arapça</a>
+                                    </li>
+                                {% endif %}
+
                             </ul>
                         </div>
                     {% endif %}
                     <div class="tab-content" id="myTabContent">
-                        {% if default_degerler.yasin %}
-                            <div class="tab-pane fade show active p-3" id="yasin" role="tabpanel"
+                        {% if default_degerler.yasin == 'var' %}
+                            <div class="tab-pane fade {% if yasin_random %}show active{% endif %} p-3" id="yasin" role="tabpanel"
                                  aria-labelledby="one-tab">
-                                <h5 class="card-title">Tab Card One</h5>
+                                <p class="card-text">
+                                <div class="container mt-5">
+                                    {% if yasin_random %}
+                                        <head>
+                                            <link href='https://fonts.googleapis.com/css?family=Raleway:600'
+                                                  rel='stylesheet' type='text/css'>
+                                        </head>
+                                        <body>
+                                        <div class="jumbotron">
+                                            <div class="container">
+                                                <h1>{{ yasin_random }}</h1>
+                                            </div>
+                                        </div>
+
+                                        </body>
+                                    {% endif %}
+                                </div>
+                                </p>
+                                <a href="{% url 'randomsoru' 1 %}" class="btn btn btn-outline-info btn-lg btn-block ">Yenile</a>
+
+                                {% comment %}
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Başlangıç</span>
@@ -51,12 +114,12 @@
                                     <div class="input-group-append">
                                         <span class="input-group-text">Bitiş</span>
                                     </div>
-
                                     <a href="{% url 'randomsoru' 1 %}" class="btn btn-primary">Go somewhere</a>
                                 </div>
+                                {% endcomment %}
                             </div>
                         {% endif %}
-                        {% if default_degerler.mulk %}
+                        {% if default_degerler.mulk == 'var'%}
                             <div class="tab-pane fade p-3" id="mulk" role="tabpanel" aria-labelledby="two-tab">
                                 <h5 class="card-title">Tab Card Two</h5>
                                 <p class="card-text">Some quick example text to build on the card title and make up the
@@ -65,7 +128,7 @@
                                 <a href="{% url 'randomsoru' 1 %}" class="btn btn-primary">Go somewhere</a>
                             </div>
                         {% endif %}
-                        {% if default_degerler.nebe %}
+                        {% if default_degerler.nebe == 'var'%}
                             <div class="tab-pane fade p-3" id="nebe" role="tabpanel" aria-labelledby="three-tab">
                                 <h5 class="card-title">Tab Card Three</h5>
                                 <p class="card-text">Some quick example text to build on the card title and make up the
@@ -74,49 +137,6 @@
                                 <a href="#" class="btn btn-primary">Go somewhere</a>
                             </div>
                         {% endif %}
-
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="card mt-3 tab-card">
-                    {% if default_degerler %}
-                        <div class="card-header tab-card-header">
-                            <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
-                                {% if default_degerler.igra %}
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="one-tab" data-toggle="tab" href="#igra" role="tab"
-                                           aria-controls="One" aria-selected="true">İgra</a>
-                                    </li>
-                                {% endif %}
-                                {% if default_degerler.beyyine %}
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="one-tab" data-toggle="tab" href="#beyyine" role="tab"
-                                           aria-controls="One" aria-selected="true">Beyyine</a>
-                                    </li>
-                                {% endif %}
-                                {% if default_degerler.duha_alti %}
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="one-tab" data-toggle="tab" href="#duha_alti" role="tab"
-                                           aria-controls="One" aria-selected="true">Duha Altı</a>
-                                    </li>
-                                {% endif %}
-                                {% if default_degerler.fil_alti %}
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="one-tab" data-toggle="tab" href="#fil_alti" role="tab"
-                                           aria-controls="One" aria-selected="true">Fil Altı</a>
-                                    </li>
-                                {% endif %}
-                            </ul>
-                        </div>
-                    {% endif %}
-
-                    <div class="tab-content" id="myTabContent">
                         {% if default_degerler.igra %}
                             <div class="tab-pane fade p-3" id="igra" role="tabpanel" aria-labelledby="three-tab">
                                 <h5 class="card-title">Tab Card Three</h5>
@@ -153,43 +173,6 @@
                                 <a href="#" class="btn btn-primary">Go somewhere</a>
                             </div>
                         {% endif %}
-
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container pb-5 mb-5">
-        <div class="row">
-            <div class="col-12">
-                <div class="card tab-card">
-                    {% if default_degerler %}
-                        <div class="card-header tab-card-header">
-                            <ul class="nav nav-tabs card-header-tabs" id="myTab" role="tablist">
-                                {% if default_degerler.tecvid %}
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="one-tab" data-toggle="tab" href="#tecvid" role="tab"
-                                           aria-controls="One" aria-selected="true">Tecvid</a>
-                                    </li>
-                                {% endif %}
-                                {% if default_degerler.siyer %}
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="one-tab" data-toggle="tab" href="#siyer" role="tab"
-                                           aria-controls="One" aria-selected="true">Siyer</a>
-                                    </li>
-                                {% endif %}
-                                {% if default_degerler.p_arapca %}
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="one-tab" data-toggle="tab" href="#p_arapca" role="tab"
-                                           aria-controls="One" aria-selected="true">Pratik Arapça</a>
-                                    </li>
-                                {% endif %}
-                            </ul>
-                        </div>
-                    {% endif %}
-
-                    <div class="tab-content" id="myTabContent">
                         {% if default_degerler.tecvid %}
                             <div class="tab-pane fade p-3" id="tecvid" role="tabpanel" aria-labelledby="three-tab">
                                 <h5 class="card-title">Tab Card Three</h5>
@@ -200,12 +183,27 @@
                             </div>
                         {% endif %}
                         {% if default_degerler.siyer %}
-                            <div class="tab-pane fade p-3" id="siyer" role="tabpanel" aria-labelledby="three-tab">
-                                <h5 class="card-title">Tab Card Three</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk
-                                    of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            <div class="tab-pane fade p-3 {% if siyer_random %}show active {% endif %}" id="siyer" role="tabpanel" aria-labelledby="three-tab">
+                                <p class="card-text">
+                                <div class="container mt-5">
+                                    {% if siyer_random %}
+                                        <head>
+                                            <link href='https://fonts.googleapis.com/css?family=Raleway:600'
+                                                  rel='stylesheet' type='text/css'>
+                                        </head>
+                                        <body>
+                                        <div class="jumbotron">
+                                            <div class="container">
+                                                <h1>{{ siyer_random.soru }}</h1>
+                                            </div>
+                                        </div>
+
+                                        </body>
+                                    {% endif %}
+                                </div>
+                                </p>
+                                <a href="{% url 'randomsoru' 9 %}" class="btn btn btn-outline-info btn-lg btn-block ">Yenile</a>
+
                             </div>
                         {% endif %}
                         {% if default_degerler.p_arapca %}
@@ -281,7 +279,21 @@
             padding-bottom: 0;
         }
     </style>
-
+    <div class="jumbotron jumbotron-fluid mt-5">
+        <div class="container">
+            <h1 class="display-4">
+                <center>RASTTGELE</center>
+            </h1>
+            <p class="lead">
+            <center>Kategorini seç, sorun hazır!</center>
+            </p>
+            <div class="text-center">
+                <a href="#">
+                    <button type="button" class="btn btn-outline-success">Müfredat Oluştur</button>
+                </a>
+            </div>
+        </div>
+    </div>
 
 
 {% endblock %}
