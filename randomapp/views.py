@@ -7,14 +7,14 @@ import pandas as pd
 def index(request):
     file_name = './ayetler.xlsx'
     context = dict()
-    dfs = pd.read_excel(file_name, sheet_name='Veri')
+    #dfs = pd.read_excel(file_name, sheet_name='Veri')
     i = 2
     j = 0
-    while i < 6236:
-        kk = KURANIKERIM(sure_isim=dfs['sure_isim'][i], sayfa=dfs['sayfa'][i], ayet_no=dfs['ayet_no'][i],
-                         ayet=dfs['ayet'][i])
-        kk.save()
-        i += 1
+    # while i < 6236:
+    #    kk = KURANIKERIM(sure_isim=dfs['sure_isim'][i], sayfa=dfs['sayfa'][i], ayet_no=dfs['ayet_no'][i],
+    #                     ayet=dfs['ayet'][i])
+    #    kk.save()
+    #    i += 1
 
     context['default_degerler'] = DefaultDegerler.objects.last()
 
