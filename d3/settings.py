@@ -24,12 +24,11 @@ SECRET_KEY = 'k1pw4(4zb8jrpe!dsh2_9))0!xa@d6nb6&$*31%$r&l4erl)$g'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
 INSTALLED_APPS = [
-    'whitenoise.runserver_nostatic',
     # My Apps :
     'randomapp',
 
@@ -121,9 +120,10 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
-SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
-STATIC_URL = '/static/'
-STATIC_ROOT = "./static"
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATICFILES_DIRS = [
-    os.path.join(SITE_ROOT, "/static"),
+    os.path.join(PROJECT_ROOT, '../static'),
 ]
+STATIC_URL = '/static/'
+
+LOGIN_URL = 'login'

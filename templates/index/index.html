@@ -12,38 +12,44 @@
                     {% if default_degerler %}
                         <div class="card-header tab-card-header ">
                             <ul class="nav nav-tabs card-header-tabs " id="myTab" role="tablist">
-
+                                {% if default_degerler.kk == 'var' %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="one-tab" data-toggle="tab" href="#kk" role="tab"
+                                           aria-controls="One" aria-selected="true">Kur'an-ı Kerim</a>
+                                    </li>
+                                {% endif %}
                                 {% if default_degerler.yasin == 'var' %}
                                     <li class="nav-item">
-                                        <a class="nav-link" id="one-tab" data-toggle="tab" href="#yasin" role="tab"
+                                        <a class="nav-link" id="one-tab" data-toggle="tab" href="#YasinSuresi"
+                                           role="tab"
                                            aria-controls="One" aria-selected="true">Yasin</a>
                                     </li>
                                 {% endif %}
                                 {% if default_degerler.mulk == 'var' %}
                                     <li class="nav-item">
-                                        <a class="nav-link" id="one-tab" data-toggle="tab" href="#mulk" role="tab"
+                                        <a class="nav-link" id="one-tab" data-toggle="tab" href="#MulkSuresi" role="tab"
                                            aria-controls="One" aria-selected="true">Mülk</a>
                                     </li>
                                 {% endif %}
-                                {% if default_degerler.nebe == 'var'%}
+                                {% if default_degerler.nebe == 'var' %}
                                     <li class="nav-item">
-                                        <a class="nav-link" id="one-tab" data-toggle="tab" href="#nebe" role="tab"
+                                        <a class="nav-link" id="one-tab" data-toggle="tab" href="#NebeSuresi" role="tab"
                                            aria-controls="One" aria-selected="true">Nebe</a>
                                     </li>
                                 {% endif %}
-                                {% if default_degerler.igra == 'var'%}
+                                {% if default_degerler.igra == 'var' %}
                                     <li class="nav-item">
                                         <a class="nav-link" id="one-tab" data-toggle="tab" href="#igra" role="tab"
                                            aria-controls="One" aria-selected="true">İgra</a>
                                     </li>
                                 {% endif %}
-                                {% if default_degerler.beyyine == 'var'%}
+                                {% if default_degerler.beyyine == 'var' %}
                                     <li class="nav-item">
                                         <a class="nav-link" id="one-tab" data-toggle="tab" href="#beyyine" role="tab"
                                            aria-controls="One" aria-selected="true">Beyyine</a>
                                     </li>
                                 {% endif %}
-                                {% if default_degerler.duha_alti == 'var'%}
+                                {% if default_degerler.duha_alti == 'var' %}
                                     <li class="nav-item">
                                         <a class="nav-link" id="one-tab" data-toggle="tab" href="#duha_alti" role="tab"
                                            aria-controls="One" aria-selected="true">Duha Altı</a>
@@ -78,12 +84,13 @@
                         </div>
                     {% endif %}
                     <div class="tab-content" id="myTabContent">
-                        {% if default_degerler.yasin == 'var' %}
-                            <div class="tab-pane fade {% if yasin_random %}show active{% endif %} p-3" id="yasin" role="tabpanel"
+                        {% if default_degerler.kk == 'var' %}
+                            <div class="tab-pane fade {% if kk_random %}show active{% endif %} p-3" id="kk"
+                                 role="tabpanel"
                                  aria-labelledby="one-tab">
                                 <p class="card-text">
                                 <div class="container mt-5">
-                                    {% if yasin_random %}
+                                    {% if kk_random %}
                                         <head>
                                             <link href='https://fonts.googleapis.com/css?family=Raleway:600'
                                                   rel='stylesheet' type='text/css'>
@@ -91,15 +98,48 @@
                                         <body>
                                         <div class="jumbotron">
                                             <div class="container">
-                                                <h1>{{ yasin_random }}</h1>
+                                                <h1>{{ kk_random }}</h1>
                                             </div>
                                         </div>
-
                                         </body>
                                     {% endif %}
+                                    <form action="{% url 'randomsoru' 11 %}" method="post">
+                                        {% csrf_token %}
+                                        <div class="row">
+                                            <div class="input-group mb-3 col-6">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="basic-addon1">Baş.</span>
+                                                </div>
+                                                <input type="text" class="form-control" placeholder="{{ kk_b }}"
+                                                       name="kk_b" value="{{ kk_b }}"
+                                                       aria-label="" aria-describedby="basic-addon1">
+                                            </div>
+                                            <div class="input-group mb-3 col-6">
+                                                <input type="text" class="form-control" placeholder="{{ kk_s }}"
+                                                       name="kk_s" value="{{ kk_s }}"
+                                                       aria-label="Username" aria-describedby="basic-addon1">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text" id="basic-addon1">Bit.</span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        {% if kk_random %}
+                                            <button
+                                                    class="btn btn btn-outline-info btn-lg btn-block" type="submit">
+                                                Yenile
+                                            </button>
+                                        {% else %}
+                                            <button
+                                                    class="btn btn btn-outline-info btn-lg btn-block" type="submit">
+                                                Başla
+                                            </button>
+                                        {% endif %}
+
+                                    </form>
                                 </div>
                                 </p>
-                                <a href="{% url 'randomsoru' 1 %}" class="btn btn btn-outline-info btn-lg btn-block ">Yenile</a>
+
 
                                 {% comment %}
                                 <div class="input-group mb-3">
@@ -119,23 +159,92 @@
                                 {% endcomment %}
                             </div>
                         {% endif %}
-                        {% if default_degerler.mulk == 'var'%}
-                            <div class="tab-pane fade p-3" id="mulk" role="tabpanel" aria-labelledby="two-tab">
-                                <h5 class="card-title">Tab Card Two</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk
-                                    of the card's content.</p>
-                                <a href="{% url 'randomsoru' 1 %}" class="btn btn-primary">Go somewhere</a>
+                        {% if default_degerler.yasin == 'var' %}
+                            <div class="tab-pane fade {% if YasinSuresi_random %}show active{% endif %} p-3"
+                                 id="YasinSuresi"
+                                 role="tabpanel"
+                                 aria-labelledby="one-tab">
+                                <p class="card-text">
+                                <div class="container mt-5">
+                                    {% if YasinSuresi_random %}
+                                        <head>
+                                            <link href='https://fonts.googleapis.com/css?family=Raleway:600'
+                                                  rel='stylesheet' type='text/css'>
+                                        </head>
+                                        <body>
+                                        <div class="jumbotron">
+                                            <div class="container">
+                                                <h1>{{ YasinSuresi_random }}</h1>
+                                            </div>
+                                        </div>
+                                        </body>
+                                    {% endif %}
+                                </div>
+                                </p>
+                                {% if YasinSuresi_random %}
+                                    <a href="{% url 'randomsoru' 1 %}"
+                                       class="btn btn btn-outline-info btn-lg btn-block ">Yenile</a>
+                                {% else %}
+                                    <a href="{% url 'randomsoru' 1 %}"
+                                       class="btn btn btn-outline-info btn-lg btn-block ">Başla</a>
+                                {% endif %}                                 </div>
+                        {% endif %}
+                        {% if default_degerler.mulk == 'var' %}
+                            <div class="tab-pane fade {% if MulkSuresi_random %}show active{% endif %} p-3"
+                                 id="MulkSuresi" role="tabpanel" aria-labelledby="one-tab">
+                                <p class="card-text">
+                                <div class="container mt-5">
+                                    {% if MulkSuresi_random %}
+                                        <head>
+                                            <link href='https://fonts.googleapis.com/css?family=Raleway:600'
+                                                  rel='stylesheet' type='text/css'>
+                                        </head>
+                                        <body>
+                                        <div class="jumbotron">
+                                            <div class="container">
+                                                <h1>{{ MulkSuresi_random }}</h1>
+                                            </div>
+                                        </div>
+                                        </body>
+                                    {% endif %}
+                                </div>
+                                </p>
+                                {% if MulkSuresi_random %}
+                                    <a href="{% url 'randomsoru' 2 %}"
+                                       class="btn btn btn-outline-info btn-lg btn-block ">Yenile</a>
+                                {% else %}
+                                    <a href="{% url 'randomsoru' 2 %}"
+                                       class="btn btn btn-outline-info btn-lg btn-block ">Başla</a>
+                                {% endif %}
                             </div>
                         {% endif %}
-                        {% if default_degerler.nebe == 'var'%}
-                            <div class="tab-pane fade p-3" id="nebe" role="tabpanel" aria-labelledby="three-tab">
-                                <h5 class="card-title">Tab Card Three</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk
-                                    of the card's content.</p>
-                                <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
+                        {% if default_degerler.nebe == 'var' %}
+                            <div class="tab-pane fade {% if NebeSuresi_random %}show active{% endif %} p-3"
+                                 id="NebeSuresi" role="tabpanel" aria-labelledby="two-tab">
+                                <p class="card-text">
+                                <div class="container mt-5">
+                                    {% if NebeSuresi_random %}
+                                        <head>
+                                            <link href='https://fonts.googleapis.com/css?family=Raleway:600'
+                                                  rel='stylesheet' type='text/css'>
+                                        </head>
+                                        <body>
+                                        <div class="jumbotron">
+                                            <div class="container">
+                                                <h1>{{ NebeSuresi_random }}</h1>
+                                            </div>
+                                        </div>
+                                        </body>
+                                    {% endif %}
+                                </div>
+                                </p>
+                                {% if NebeSuresi_random %}
+                                    <a href="{% url 'randomsoru' 3 %}"
+                                       class="btn btn btn-outline-info btn-lg btn-block ">Yenile</a>
+                                {% else %}
+                                    <a href="{% url 'randomsoru' 3 %}"
+                                       class="btn btn btn-outline-info btn-lg btn-block ">Başla</a>
+                                {% endif %}                            </div>
                         {% endif %}
                         {% if default_degerler.igra %}
                             <div class="tab-pane fade p-3" id="igra" role="tabpanel" aria-labelledby="three-tab">
@@ -183,7 +292,8 @@
                             </div>
                         {% endif %}
                         {% if default_degerler.siyer %}
-                            <div class="tab-pane fade p-3 {% if siyer_random %}show active {% endif %}" id="siyer" role="tabpanel" aria-labelledby="three-tab">
+                            <div class="tab-pane fade p-3 {% if siyer_random %}show active {% endif %}" id="siyer"
+                                 role="tabpanel" aria-labelledby="three-tab">
                                 <p class="card-text">
                                 <div class="container mt-5">
                                     {% if siyer_random %}
@@ -202,8 +312,13 @@
                                     {% endif %}
                                 </div>
                                 </p>
-                                <a href="{% url 'randomsoru' 9 %}" class="btn btn btn-outline-info btn-lg btn-block ">Yenile</a>
-
+                                {% if siyer_random %}
+                                    <a href="{% url 'randomsoru' 9 %}"
+                                       class="btn btn btn-outline-info btn-lg btn-block ">Yenile</a>
+                                {% else %}
+                                    <a href="{% url 'randomsoru' 9 %}"
+                                       class="btn btn btn-outline-info btn-lg btn-block ">Başla</a>
+                                {% endif %}
                             </div>
                         {% endif %}
                         {% if default_degerler.p_arapca %}
@@ -287,13 +402,44 @@
             <p class="lead">
             <center>Kategorini seç, sorun hazır!</center>
             </p>
-            <div class="text-center">
-                <a href="#">
-                    <button type="button" class="btn btn-outline-success">Müfredat Oluştur</button>
-                </a>
+            <div class="text-center"><!-- Button trigger modal -->
+                {% if not user.is_authenticated %}
+                    <button type="button" class="btn btn-outline-success" data-toggle="modal"
+                            data-target="#exampleModal">
+                        Müfredat Oluştur
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Müfredat</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Giriş yaparsanız kayıtlı müfredatınız kaybolmayacak.
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">İptal
+                                    </button>
+                                    <a href="{% url 'login' %}">
+                                        <button type="button" class="btn btn-primary">Giriş yap</button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <a href="{% url 'mufredat' %}">
+                        <button type="button" class="btn btn-outline-success">Müfredat Oluştur</button>
+                    </a>
+                {% endif %}
             </div>
         </div>
     </div>
-
 
 {% endblock %}

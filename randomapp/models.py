@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
@@ -9,6 +11,7 @@ MESSAGE_STATUS = (
 
 class Kullanicilar(models.Model):
     session = models.CharField(blank=True, null=True, max_length=100)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
     yasin = models.CharField(max_length=25,
                              choices=MESSAGE_STATUS,
                              default='var',
@@ -69,10 +72,10 @@ class Kullanicilar(models.Model):
                                 blank=True,
                                 null=True,
                                 )
-    kk_sayfa_ilk = models.SmallIntegerField("Başlangıç")
-    kk_sayfa_son = models.SmallIntegerField("Bitiş")
-    ilmihal_ilk = models.SmallIntegerField("Başlangıç")
-    ilmihal_son = models.SmallIntegerField("Bitiş")
+    kk_sayfa_ilk = models.SmallIntegerField("Başlangıç", blank=True, default=1)
+    kk_sayfa_son = models.SmallIntegerField("Bitiş", blank=True, default=600)
+    ilmihal_ilk = models.SmallIntegerField("Başlangıç", blank=True, default=0)
+    ilmihal_son = models.SmallIntegerField("Bitiş", blank=True, default=100)
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
@@ -100,7 +103,7 @@ class ilmihal(models.Model):
 
 class siyer(models.Model):
     soru = models.TextField(max_length=600, blank=False)
-    sayfa = models.SmallIntegerField(blank=True,default=0)
+    sayfa = models.SmallIntegerField(blank=True, default=0)
     aciklama = models.CharField(max_length=255, blank=True)
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
@@ -127,6 +130,57 @@ class PratikArapca(models.Model):
 
     def __str__(self):
         return f"P. Arapça soru no : {self.pk}"
+
+
+class YasinSuresi(models.Model):
+    soru = models.TextField(max_length=600, blank=False)
+    aciklama = models.CharField(max_length=255, blank=True)
+    create_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Yasin Suresi soru no : {self.pk}"
+
+
+class MulkSuresi(models.Model):
+    soru = models.TextField(max_length=600, blank=False)
+    aciklama = models.CharField(max_length=255, blank=True)
+    create_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Mülk Suresi soru no : {self.pk}"
+
+
+class NebeSuresi(models.Model):
+    soru = models.TextField(max_length=600, blank=False)
+    aciklama = models.CharField(max_length=255, blank=True)
+    create_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Mülk Suresi soru no : {self.pk}"
+
+
+class s_Yasin(models.Model):
+    yasin_id = models.ForeignKey(YasinSuresi, blank=False, null=False, on_delete=models.CASCADE)
+    kullanici_id = models.ForeignKey(Kullanicilar, blank=False, null=False, on_delete=models.CASCADE)
+    create_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
+
+
+class s_Mulk(models.Model):
+    Mulk_id = models.ForeignKey(MulkSuresi, blank=False, null=False, on_delete=models.CASCADE)
+    kullanici_id = models.ForeignKey(Kullanicilar, blank=False, null=False, on_delete=models.CASCADE)
+    create_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
+
+
+class s_Nebe(models.Model):
+    Nebe_id = models.ForeignKey(NebeSuresi, blank=False, null=False, on_delete=models.CASCADE)
+    kullanici_id = models.ForeignKey(Kullanicilar, blank=False, null=False, on_delete=models.CASCADE)
+    create_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
 
 
 class s_ilmihal(models.Model):
@@ -165,12 +219,17 @@ class s_ezber(models.Model):
 
 
 class DefaultDegerler(models.Model):
-    kk_sayfa_ilk = models.SmallIntegerField("Başlangıç", default=0)
-    kk_sayfa_son = models.SmallIntegerField("Bitiş", default=604)
-    ilmihal_ilk = models.SmallIntegerField("Başlangıç")
-    ilmihal_son = models.SmallIntegerField("Bitiş")
-    yasin_ilk = models.SmallIntegerField("Başlangıç", default=1)
-    yasin_son = models.SmallIntegerField("Bitiş", default=6)
+    kk_sayfa_ilk = models.SmallIntegerField("Başlangıç", default=0, blank=True)
+    kk_sayfa_son = models.SmallIntegerField("Bitiş", default=604, blank=True)
+    ilmihal_ilk = models.SmallIntegerField("Başlangıç", blank=True)
+    ilmihal_son = models.SmallIntegerField("Bitiş", blank=True)
+    kk = models.CharField(max_length=25,
+                          choices=MESSAGE_STATUS,
+                          default='var',
+                          blank=False,
+                          null=False,
+                          )
+
     yasin = models.CharField(max_length=25,
                              choices=MESSAGE_STATUS,
                              default='var',
