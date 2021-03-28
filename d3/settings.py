@@ -132,8 +132,8 @@ LOGOUT_REDIRECT_URL = '/'
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'yunus.gulbuz@gmail.com'
-EMAIL_HOST_PASSWORD = '******'
+EMAIL_HOST_USER = 'adkkrt2021@gmail.com'
+EMAIL_HOST_PASSWORD = '123456789/052gfds'
 EMAIL_PORT = 587
 
 AUTHENTICATION_BACKENDS = ['randomapp.UsernameOrEmail.EmailAuthBackend']

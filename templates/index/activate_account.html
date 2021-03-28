@@ -1,19 +1,5 @@
-{% extends 'index/base.html' %}
-{% load crispy_forms_filters %}
-{% load static %}
-
-{% block content %}
-    <!------ Include the above in your HEAD tag ---------->
-
-    <div class="container text-center">
-        <div class="row mt-5">
-            <div class="col-12 mt-5">
-                {% autoescape off %}
-                    Hi {{ user.username }},
-                    Please click on the link below to confirm your registration.
-                    http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
-                {% endautoescape %}
-            </div>
-        </div>
-    </div>
-{% endblock %}
+{% autoescape off %}
+    Merhaba {{ user.username }},
+    Bu linke tıklayarak hesabınızı aktive edebilirsiniz.
+    http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+{% endautoescape %}
