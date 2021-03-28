@@ -113,13 +113,17 @@ def index(request, randomsoru=0):
             if request.user.is_authenticated:
                 kullanici = Kullanicilar.objects.filter(user=request.user).last()
                 if request.POST['kk_b'] and request.POST['kk_s']:
-                    if (int(request.POST['kk_b']) > int(request.POST['kk_s'])) or (
-                            int(request.POST['kk_b']) < KK_min or int(request.POST['kk_s']) > KK_max):
+                    if str(request.POST['kk_s']).isdigit() and str(request.POST['kk_b']).isdigit():
+                        if (int(request.POST['kk_b']) > int(request.POST['kk_s'])) or (
+                                int(request.POST['kk_b']) < KK_min or int(request.POST['kk_s']) > KK_max):
+                            context['kk_b'] = KK_min
+                            context['kk_s'] = KK_max
+                        else:
+                            context['kk_b'] = request.POST['kk_b']
+                            context['kk_s'] = request.POST['kk_s']
+                    else:
                         context['kk_b'] = KK_min
                         context['kk_s'] = KK_max
-                    else:
-                        context['kk_b'] = request.POST['kk_b']
-                        context['kk_s'] = request.POST['kk_s']
                 else:
                     if kullanici:
                         context['kk_b'] = kullanici.kk_sayfa_ilk
