@@ -6,6 +6,7 @@
     <div class="container mt-5">
         <div class="row mt-5">
             <div class="col-lg-12 mt-5">
+                {% comment %}
                 <form action="{% url 'register' %}" method="POST">
                     {% csrf_token %}
                     <div class="form-group">
@@ -31,6 +32,12 @@
                                placeholder="">
                     </div>
                     <button type="submit" class="btn btn-primary">Kayıt ol</button>
+                </form>
+                {% endcomment %}
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{ form | crispy }}
+                    <button type="submit" class="btn btn-outline-primary">Kayıt ol</button>
                 </form>
             </div>
         </div>

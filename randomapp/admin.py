@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .views import Kullanicilar,DefaultDegerler
+from .models import Kullanicilar,DefaultDegerler
 from .models import siyer
 admin.site.register(Kullanicilar)
 admin.site.register(DefaultDegerler)

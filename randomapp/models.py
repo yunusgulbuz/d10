@@ -10,7 +10,6 @@ MESSAGE_STATUS = (
 
 
 class Kullanicilar(models.Model):
-    session = models.CharField(blank=True, null=True, max_length=100)
     user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
     yasin = models.CharField(max_length=25,
                              choices=MESSAGE_STATUS,
@@ -72,15 +71,15 @@ class Kullanicilar(models.Model):
                                 blank=True,
                                 null=True,
                                 )
-    kk_sayfa_ilk = models.SmallIntegerField("Başlangıç", blank=True, default=1)
-    kk_sayfa_son = models.SmallIntegerField("Bitiş", blank=True, default=600)
-    ilmihal_ilk = models.SmallIntegerField("Başlangıç", blank=True, default=0)
-    ilmihal_son = models.SmallIntegerField("Bitiş", blank=True, default=100)
+    kk_sayfa_ilk = models.SmallIntegerField("Başlangıç", blank=True, null=True, default=1)
+    kk_sayfa_son = models.SmallIntegerField("Bitiş", blank=True, null=True, default=600)
+    ilmihal_ilk = models.SmallIntegerField("Başlangıç", blank=True, null=True, default=0)
+    ilmihal_son = models.SmallIntegerField("Bitiş", blank=True, null=True, default=100)
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.session
+        return self.user.username
 
 
 class KURANIKERIM(models.Model):

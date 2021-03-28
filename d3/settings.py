@@ -108,7 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'tr'
 
 TIME_ZONE = 'UTC'
 
@@ -126,4 +126,14 @@ STATICFILES_DIRS = [
 ]
 STATIC_URL = '/static/'
 
-LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'yunus.gulbuz@gmail.com'
+EMAIL_HOST_PASSWORD = '184452/052gfdsay'
+EMAIL_PORT = 587
+
+AUTHENTICATION_BACKENDS = ['randomapp.UsernameOrEmail.EmailAuthBackend']
