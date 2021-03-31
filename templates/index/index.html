@@ -33,75 +33,75 @@
                         {% if default_degerler %}
                             <div class="card-header tab-card-header ">
                                 <ul class="nav nav-tabs card-header-tabs " id="myTab" role="tablist">
-                                    {% if default_degerler.kk == 'var' %}
+                                    {% if default_degerler.KURANIKERIM == 'var' %}
                                         <li class="nav-item">
-                                            <a class="nav-link" id="one-tab" data-toggle="tab" href="#kk" role="tab"
+                                            <a class="nav-link" id="one-tab" data-toggle="tab" href="#KURANIKERIM" role="tab"
                                                aria-controls="One" aria-selected="true">Kur'an-ı Kerim</a>
                                         </li>
                                     {% endif %}
-                                    {% if default_degerler.yasin == 'var' %}
+                                    {% if default_degerler.YasinSuresi == 'var' %}
                                         <li class="nav-item">
                                             <a class="nav-link" id="one-tab" data-toggle="tab" href="#YasinSuresi"
                                                role="tab"
-                                               aria-controls="One" aria-selected="true">Yasin</a>
+                                               aria-controls="One" aria-selected="true">Yasin Suresi</a>
                                         </li>
                                     {% endif %}
-                                    {% if default_degerler.mulk == 'var' %}
+                                    {% if default_degerler.MulkSuresi == 'var' %}
                                         <li class="nav-item">
                                             <a class="nav-link" id="one-tab" data-toggle="tab" href="#MulkSuresi"
                                                role="tab"
-                                               aria-controls="One" aria-selected="true">Mülk</a>
+                                               aria-controls="One" aria-selected="true">Mülk Suresi</a>
                                         </li>
                                     {% endif %}
-                                    {% if default_degerler.nebe == 'var' %}
+                                    {% if default_degerler.NebeSuresi == 'var' %}
                                         <li class="nav-item">
                                             <a class="nav-link" id="one-tab" data-toggle="tab" href="#NebeSuresi"
                                                role="tab"
-                                               aria-controls="One" aria-selected="true">Nebe</a>
+                                               aria-controls="One" aria-selected="true">Nebe Suresi</a>
                                         </li>
                                     {% endif %}
-                                    {% if default_degerler.igra == 'var' %}
+                                    {% if default_degerler.AlakSuresi == 'var' %}
                                         <li class="nav-item">
-                                            <a class="nav-link" id="one-tab" data-toggle="tab" href="#igra" role="tab"
-                                               aria-controls="One" aria-selected="true">İgra</a>
+                                            <a class="nav-link" id="one-tab" data-toggle="tab" href="#AlakSuresi" role="tab"
+                                               aria-controls="One" aria-selected="true">Alak Suresi</a>
                                         </li>
                                     {% endif %}
-                                    {% if default_degerler.beyyine == 'var' %}
+                                    {% if default_degerler.BeyyineSuresi == 'var' %}
                                         <li class="nav-item">
-                                            <a class="nav-link" id="one-tab" data-toggle="tab" href="#beyyine"
+                                            <a class="nav-link" id="one-tab" data-toggle="tab" href="#BeyyineSuresi"
                                                role="tab"
-                                               aria-controls="One" aria-selected="true">Beyyine</a>
+                                               aria-controls="One" aria-selected="true">Beyyine Suresi</a>
                                         </li>
                                     {% endif %}
-                                    {% if default_degerler.duha_alti == 'var' %}
+                                    {% if default_degerler.DuhaSuresininAlti == 'var' %}
                                         <li class="nav-item">
-                                            <a class="nav-link" id="one-tab" data-toggle="tab" href="#duha_alti"
+                                            <a class="nav-link" id="one-tab" data-toggle="tab" href="#DuhaSuresininAlti"
                                                role="tab"
-                                               aria-controls="One" aria-selected="true">Duha Altı</a>
+                                               aria-controls="One" aria-selected="true">Duha Suresi'nin Altındaki Sureler</a>
                                         </li>
                                     {% endif %}
-                                    {% if default_degerler.fil_alti == 'var' %}
+                                    {% if default_degerler.FilSuresininAlti == 'var' %}
                                         <li class="nav-item">
-                                            <a class="nav-link" id="one-tab" data-toggle="tab" href="#fil_alti"
+                                            <a class="nav-link" id="one-tab" data-toggle="tab" href="#FilSuresininAlti"
                                                role="tab"
-                                               aria-controls="One" aria-selected="true">Fil Altı</a>
+                                               aria-controls="One" aria-selected="true">Fil Suresi'nin Altındaki Sureler</a>
                                         </li>
                                     {% endif %}
-                                    {% if default_degerler.tecvid == 'var' %}
+                                    {% if default_degerler.Tecvid == 'var' %}
                                         <li class="nav-item">
-                                            <a class="nav-link" id="one-tab" data-toggle="tab" href="#tecvid" role="tab"
+                                            <a class="nav-link" id="one-tab" data-toggle="tab" href="#Tecvid" role="tab"
                                                aria-controls="One" aria-selected="true">Tecvid</a>
                                         </li>
                                     {% endif %}
-                                    {% if default_degerler.siyer == 'var' %}
+                                    {% if default_degerler.SiyeriNebi == 'var' %}
                                         <li class="nav-item">
-                                            <a class="nav-link" id="one-tab" data-toggle="tab" href="#siyer" role="tab"
-                                               aria-controls="One" aria-selected="true">Siyer</a>
+                                            <a class="nav-link" id="one-tab" data-toggle="tab" href="#SiyeriNebi" role="tab"
+                                               aria-controls="One" aria-selected="true">Siyer-i Nebi</a>
                                         </li>
                                     {% endif %}
-                                    {% if default_degerler.p_arapca == 'var' %}
+                                    {% if default_degerler.PratikArapca == 'var' %}
                                         <li class="nav-item">
-                                            <a class="nav-link" id="one-tab" data-toggle="tab" href="#p_arapca"
+                                            <a class="nav-link" id="one-tab" data-toggle="tab" href="#PratikArapca"
                                                role="tab"
                                                aria-controls="One" aria-selected="true">Pratik Arapça</a>
                                         </li>
@@ -118,30 +118,27 @@
                             }
                         </style>
                         <div class="tab-content" id="myTabContent">
-                            {% if default_degerler.kk == 'var' %}
-                                <div class="tab-pane fade {% if kk_random %}show active{% endif %} p-3" id="kk"
+                            {% if default_degerler.KURANIKERIM == 'var' %}
+                                <div class="tab-pane fade {% if KURANIKERIM_random %}show active{% endif %} p-3" id="KURANIKERIM"
                                      role="tabpanel"
                                      aria-labelledby="one-tab">
                                     <p class="card-text">
                                     <div class="container mt-5">
-                                        {% if kk_random %}
+                                        {% if KURANIKERIM_random %}
                                             <head>
-                                                <link href='https://fonts.googleapis.com/css2?family=Amiri'
-                                                      rel='stylesheet' type='text/css'>
+                                                <link rel="preconnect" href="https://fonts.gstatic.com">
+                                                <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&display=swap"
+                                                      rel="stylesheet">
                                             </head>
                                             <body>
                                             <div class="jumbotron">
                                                 <div class="container">
-                                                    <h4 style="font-family: Amiri,monospace">﴾ {{ kk_random.sure_isim }}
-                                                        - {{ kk_random.ayet_no }} ﴿</h4>
+                                                    <h4 style="font-family: 'Amiri', serif;">﴾ {{ KURANIKERIM_random.sure_isim }}
+                                                        - {{ KURANIKERIM_random.ayet_no }} ﴿</h4>
                                                     <br>
-                                                    <h1 style="line-height:80px;
-                                                    font-size: 30px;
-                                                    font-style: revert;
-                                                    font-family: Amiri,monospace">{{ kk_random.ayet | truncatechars:35 }}</h1>
+                                                    <h1 style="font-family: 'Amiri', serif;">{{ KURANIKERIM_random.ayet | truncatewords:5 }}</h1>
                                                     <br>
-                                                    <h1 style="font-size: 40px;
-                                                    font-family: Amiri,monospace">{{ kk_random.sayfa }}</h1>
+                                                    <h1 style="font-family: 'Amiri', serif;">{{ KURANIKERIM_random.sayfa }}</h1>
                                                 </div>
                                             </div>
                                             </body>
@@ -153,13 +150,13 @@
                                                     <div class="input-group-prepend">
                                                         <span class="input-group-text" id="basic-addon1">Baş.</span>
                                                     </div>
-                                                    <input type="text" class="form-control" placeholder="{{ kk_b }}"
-                                                           name="kk_b" value="{{ kk_b }}"
+                                                    <input type="text" class="form-control" placeholder="{{ KURANIKERIM_b }}"
+                                                           name="KURANIKERIM_b" value="{{ KURANIKERIM_b }}"
                                                            aria-label="" aria-describedby="basic-addon1">
                                                 </div>
                                                 <div class="input-group mb-3 col-6">
-                                                    <input type="text" class="form-control" placeholder="{{ kk_s }}"
-                                                           name="kk_s" value="{{ kk_s }}"
+                                                    <input type="text" class="form-control" placeholder="{{ KURANIKERIM_s }}"
+                                                           name="KURANIKERIM_s" value="{{ KURANIKERIM_s }}"
                                                            aria-label="Username" aria-describedby="basic-addon1">
                                                     <div class="input-group-append">
                                                         <span class="input-group-text" id="basic-addon1">Bit.</span>
@@ -167,7 +164,7 @@
                                                 </div>
 
                                             </div>
-                                            {% if kk_random %}
+                                            {% if KURANIKERIM_random %}
                                                 <button
                                                         class="btn btn btn-outline-info btn-lg btn-block" type="submit">
                                                     Yenile
@@ -182,27 +179,9 @@
                                         </form>
                                     </div>
                                     </p>
-
-
-                                    {% comment %}
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">Başlangıç</span>
-                                    </div>
-                                    <input type="text" class="form-control mr-1" id="giris1" placeholder=""
-                                           aria-label="Username"
-                                           aria-describedby="basic-addon1">
-                                    <input type="text" class="form-control ml-1" id="giris2"
-                                           aria-label="Amount (to the nearest dollar)">
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">Bitiş</span>
-                                    </div>
-                                    <a href="{% url 'randomsoru' 1 %}" class="btn btn-primary">Go somewhere</a>
-                                </div>
-                                {% endcomment %}
                                 </div>
                             {% endif %}
-                            {% if default_degerler.yasin == 'var' %}
+                            {% if default_degerler.YasinSuresi == 'var' %}
                                 <div class="tab-pane fade {% if YasinSuresi_random %}show active{% endif %} p-3"
                                      id="YasinSuresi"
                                      role="tabpanel"
@@ -211,15 +190,14 @@
                                     <div class="container mt-5">
                                         {% if YasinSuresi_random %}
                                             <head>
-                                                <link href='https://fonts.googleapis.com/css2?family=Amiri'
-                                                      rel='stylesheet' type='text/css'>
+                                                <link rel="preconnect" href="https://fonts.gstatic.com">
+                                                <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&display=swap"
+                                                      rel="stylesheet">
                                             </head>
                                             <body>
                                             <div class="jumbotron">
                                                 <div class="container">
-                                                    <h1 style="line-height:80px;
-                                                    font-family: Amiri,monospace;
-                                                    font-size: 30px">{{ YasinSuresi_random }}</h1>
+                                                    <h1 style="font-family: 'Amiri', serif;">{{ YasinSuresi_random }}</h1>
                                                 </div>
                                             </div>
                                             </body>
@@ -234,22 +212,21 @@
                                            class="btn btn btn-outline-info btn-lg btn-block ">Başla</a>
                                     {% endif %}                                 </div>
                             {% endif %}
-                            {% if default_degerler.mulk == 'var' %}
+                            {% if default_degerler.MulkSuresi == 'var' %}
                                 <div class="tab-pane fade {% if MulkSuresi_random %}show active{% endif %} p-3"
                                      id="MulkSuresi" role="tabpanel" aria-labelledby="one-tab">
                                     <p class="card-text">
                                     <div class="container mt-5">
                                         {% if MulkSuresi_random %}
                                             <head>
-                                                <link href='https://fonts.googleapis.com/css2?family=Amiri'
-                                                      rel='stylesheet' type='text/css'>
+                                                <link rel="preconnect" href="https://fonts.gstatic.com">
+                                                <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&display=swap"
+                                                      rel="stylesheet">
                                             </head>
                                             <body>
                                             <div class="jumbotron">
                                                 <div class="container">
-                                                    <h1 style="line-height:80px;
-                                                    font-size: 30px;
-                                                    font-family: Amiri,monospace">{{ MulkSuresi_random }}</h1>
+                                                    <h1 style="font-family: 'Amiri', serif;">{{ MulkSuresi_random }}</h1>
                                                 </div>
                                             </div>
                                             </body>
@@ -265,22 +242,21 @@
                                     {% endif %}
                                 </div>
                             {% endif %}
-                            {% if default_degerler.nebe == 'var' %}
+                            {% if default_degerler.NebeSuresi == 'var' %}
                                 <div class="tab-pane fade {% if NebeSuresi_random %}show active{% endif %} p-3"
                                      id="NebeSuresi" role="tabpanel" aria-labelledby="two-tab">
                                     <p class="card-text">
                                     <div class="container mt-5">
                                         {% if NebeSuresi_random %}
                                             <head>
-                                                <link href='https://fonts.googleapis.com/css2?family=Amiri'
-                                                      rel='stylesheet' type='text/css'>
+                                                <link rel="preconnect" href="https://fonts.gstatic.com">
+                                                <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&display=swap"
+                                                      rel="stylesheet">
                                             </head>
                                             <body>
                                             <div class="jumbotron">
                                                 <div class="container">
-                                                    <h1 style="line-height:80px;
-                                                    font-size: 30px;
-                                                    font-family: Amiri,monospace">{{ NebeSuresi_random }}</h1>
+                                                    <h1 style="font-family: 'Amiri', serif;">{{ NebeSuresi_random }}</h1>
                                                 </div>
                                             </div>
                                             </body>
@@ -295,76 +271,58 @@
                                            class="btn btn btn-outline-info btn-lg btn-block ">Başla</a>
                                     {% endif %}                            </div>
                             {% endif %}
-                            {% if default_degerler.igra %}
-                                <div class="tab-pane fade p-3" id="igra" role="tabpanel" aria-labelledby="three-tab">
-                                    <h5 class="card-title">Tab Card Three</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up
-                                        the
-                                        bulk
-                                        of the card's content.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                            {% if default_degerler.AlakSuresi %}
+                                <div class="tab-pane fade p-3" id="AlakSuresi" role="tabpanel" aria-labelledby="three-tab">
+                                    <h5 class="card-title">Yeni Kart</h5>
+                                    <p class="card-text">Henüz yapım aşamasında</p>
+                                    <a href="#" class="btn btn-primary">--------</a>
                                 </div>
                             {% endif %}
-                            {% if default_degerler.beyyine %}
-                                <div class="tab-pane fade p-3" id="beyyine" role="tabpanel" aria-labelledby="three-tab">
-                                    <h5 class="card-title">Tab Card Three</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up
-                                        the
-                                        bulk
-                                        of the card's content.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                            {% if default_degerler.BeyyineSuresi %}
+                                <div class="tab-pane fade p-3" id="BeyyineSuresi" role="tabpanel" aria-labelledby="three-tab">
+                                    <h5 class="card-title">Yeni Kart</h5>
+                                    <p class="card-text">Henüz yapım aşamasında</p>
+                                    <a href="#" class="btn btn-primary">--------</a>
                                 </div>
                             {% endif %}
-                            {% if default_degerler.duha_alti %}
-                                <div class="tab-pane fade p-3" id="duha_alti" role="tabpanel"
+                            {% if default_degerler.DuhaSuresininAlti %}
+                                <div class="tab-pane fade p-3" id="DuhaSuresininAlti" role="tabpanel"
                                      aria-labelledby="three-tab">
-                                    <h5 class="card-title">Tab Card Three</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up
-                                        the
-                                        bulk
-                                        of the card's content.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                    <h5 class="card-title">Yeni Kart</h5>
+                                    <p class="card-text">Henüz yapım aşamasında</p>
+                                    <a href="#" class="btn btn-primary">--------</a>
                                 </div>
                             {% endif %}
-                            {% if default_degerler.fil_alti %}
-                                <div class="tab-pane fade p-3" id="fil_alti" role="tabpanel"
+                            {% if default_degerler.FilSuresininAlti %}
+                                <div class="tab-pane fade p-3" id="FilSuresininAlti" role="tabpanel"
                                      aria-labelledby="three-tab">
-                                    <h5 class="card-title">Tab Card Three</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up
-                                        the
-                                        bulk
-                                        of the card's content.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                    <h5 class="card-title">Yeni Kart</h5>
+                                    <p class="card-text">Henüz yapım aşamasında</p>
+                                    <a href="#" class="btn btn-primary">--------</a>
                                 </div>
                             {% endif %}
-                            {% if default_degerler.tecvid %}
-                                <div class="tab-pane fade p-3" id="tecvid" role="tabpanel" aria-labelledby="three-tab">
-                                    <h5 class="card-title">Tab Card Three</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up
-                                        the
-                                        bulk
-                                        of the card's content.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                            {% if default_degerler.Tecvid %}
+                                <div class="tab-pane fade p-3" id="Tecvid" role="tabpanel" aria-labelledby="three-tab">
+                                    <h5 class="card-title">Yeni Kart</h5>
+                                    <p class="card-text">Henüz yapım aşamasında</p>
+                                    <a href="#" class="btn btn-primary">--------</a>
                                 </div>
                             {% endif %}
-                            {% if default_degerler.siyer %}
-                                <div class="tab-pane fade p-3 {% if siyer_random %}show active {% endif %}" id="siyer"
+                            {% if default_degerler.SiyeriNebi %}
+                                <div class="tab-pane fade p-3 {% if SiyeriNebi_random %}show active {% endif %}" id="SiyeriNebi"
                                      role="tabpanel" aria-labelledby="three-tab">
                                     <p class="card-text">
                                     <div class="container mt-5">
-                                        {% if siyer_random %}
+                                        {% if SiyeriNebi_random %}
                                             <head>
-                                                <link href='https://fonts.googleapis.com/css?family=Roboto'
-                                                      rel='stylesheet' type='text/css'>
+                                                <link rel="preconnect" href="https://fonts.gstatic.com">
+                                                <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500&display=swap"
+                                                      rel="stylesheet">
                                             </head>
                                             <body>
                                             <div class="jumbotron">
                                                 <div class="container">
-                                                    <h1
-                                                            style="font-style: italic;
-                                                    font-size: 30px;
-                                                    font-family: Amiri,monospace"
-                                                    >{{ siyer_random.soru }}</h1>
+                                                    <h1 style="font-family: 'Baloo 2', cursive;">{{ SiyeriNebi_random.soru }}</h1>
                                                 </div>
                                             </div>
 
@@ -372,7 +330,7 @@
                                         {% endif %}
                                     </div>
                                     </p>
-                                    {% if siyer_random %}
+                                    {% if SiyeriNebi_random %}
                                         <a href="{% url 'randomsoru' 9 %}"
                                            class="btn btn btn-outline-info btn-lg btn-block ">Yenile</a>
                                     {% else %}
@@ -381,15 +339,12 @@
                                     {% endif %}
                                 </div>
                             {% endif %}
-                            {% if default_degerler.p_arapca %}
-                                <div class="tab-pane fade p-3" id="p_arapca" role="tabpanel"
+                            {% if default_degerler.PratikArapca %}
+                                <div class="tab-pane fade p-3" id="PratikArapca" role="tabpanel"
                                      aria-labelledby="three-tab">
-                                    <h5 class="card-title">Tab Card Three</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up
-                                        the
-                                        bulk
-                                        of the card's content.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                    <h5 class="card-title">Yeni Kart</h5>
+                                    <p class="card-text">Henüz yapım aşamasında</p>
+                                    <a href="#" class="btn btn-primary">--------</a>
                                 </div>
                             {% endif %}
 
@@ -700,7 +655,7 @@
     <div class="jumbotron jumbotron-fluid mt-5">
         <div class="container">
             <h1 class="display-4">
-                <center>ADKkrt</center>
+                <center><ADKk></ADKk>rt</center>
             </h1>
             <p class="lead">
             <center>Kategorini seç, sorun hazır!</center>

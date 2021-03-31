@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import Mufredat
-from .models import Kullanicilar, DefaultDegerler, KURANIKERIM, siyer, YasinSuresi, MulkSuresi, NebeSuresi
+from .models import Kullanicilar, DefaultDegerler, KURANIKERIM, SiyeriNebi, YasinSuresi, MulkSuresi, NebeSuresi
 from django.contrib.auth.models import User
 from django.contrib import messages, auth
 import pandas as pd
@@ -31,8 +31,8 @@ from django.views.generic import FormView
 from randomapp.forms import CustomUserCreationForm
 from .tokens import account_activate_token
 
-KK_max = 600
-KK_min = 0
+KURANIKERIM_max = 600
+KURANIKERIM_min = 0
 
 
 class RegisterUser(SuccessMessageMixin, FormView):
@@ -86,6 +86,19 @@ class ActivateView(View):
 
 
 def index(request, randomsoru=0):
+    KURANIKERIM.objects.all().delete()
+    """
+    # .xlsx Veri Çekme
+    dfs = pd.read_excel('Ayetler2.xlsx', sheet_name='Veri')
+    i = 0
+    while i < 6236:
+        Ayetler = KURANIKERIM.objects.create(sure_isim=dfs.values[i][0],
+                                             sayfa=dfs.values[i][1],
+                                             ayet_no=dfs.values[i][2],
+                                             ayet=dfs.values[i][3])
+        i += 1
+    """
+
     context = dict()
     context['default_degerler'] = DefaultDegerler.objects.last()
     if randomsoru == 1:
@@ -105,131 +118,81 @@ def index(request, randomsoru=0):
     elif randomsoru == 8:
         return  # tecvid
     elif randomsoru == 9:
-        context['siyer_random'] = siyer.objects.order_by('?')[0]
+        context['SiyeriNebi_random'] = SiyeriNebi.objects.order_by('?')[0]
     elif randomsoru == 10:
         return  # p_arapca
     elif randomsoru == 11:
         if request.POST:
             if request.user.is_authenticated:
                 kullanici = Kullanicilar.objects.filter(user=request.user).last()
-                if request.POST['kk_b'] and request.POST['kk_s']:
-                    if str(request.POST['kk_s']).isdigit() and str(request.POST['kk_b']).isdigit():
-                        if (int(request.POST['kk_b']) > int(request.POST['kk_s'])) or (
-                                int(request.POST['kk_b']) < KK_min or int(request.POST['kk_s']) > KK_max):
-                            context['kk_b'] = KK_min
-                            context['kk_s'] = KK_max
+                if request.POST['KURANIKERIM_b'] and request.POST['KURANIKERIM_s']:
+                    if str(request.POST['KURANIKERIM_s']).isdigit() and str(request.POST['KURANIKERIM_b']).isdigit():
+                        if (int(request.POST['KURANIKERIM_b']) > int(request.POST['KURANIKERIM_s'])) or (
+                                int(request.POST['KURANIKERIM_b']) < KURANIKERIM_min or int(
+                            request.POST['KURANIKERIM_s']) > KURANIKERIM_max):
+                            context['KURANIKERIM_b'] = KURANIKERIM_min
+                            context['KURANIKERIM_s'] = KURANIKERIM_max
                         else:
-                            context['kk_b'] = request.POST['kk_b']
-                            context['kk_s'] = request.POST['kk_s']
+                            context['KURANIKERIM_b'] = request.POST['KURANIKERIM_b']
+                            context['KURANIKERIM_s'] = request.POST['KURANIKERIM_s']
                     else:
-                        context['kk_b'] = KK_min
-                        context['kk_s'] = KK_max
+                        context['KURANIKERIM_b'] = KURANIKERIM_min
+                        context['KURANIKERIM_s'] = KURANIKERIM_max
                 else:
                     if kullanici:
-                        context['kk_b'] = kullanici.kk_sayfa_ilk
-                        context['kk_s'] = kullanici.kk_sayfa_son
+                        context['KURANIKERIM_b'] = kullanici.KURANIKERIMSayfaIlk
+                        context['KURANIKERIM_s'] = kullanici.KURANIKERIMSayfaSon
                     else:
-                        context['kk_b'] = KK_min
-                        context['kk_s'] = KK_max
+                        context['KURANIKERIM_b'] = KURANIKERIM_min
+                        context['KURANIKERIM_s'] = KURANIKERIM_max
             else:
-                if request.POST['kk_b'] and request.POST['kk_s']:
-                    if type(request.POST['kk_s']) == int or type(request.POST['kk_b']) == int:
-                        if (int(request.POST['kk_b']) > int(request.POST['kk_s'])) or (
-                                int(request.POST['kk_b']) < KK_min or int(request.POST['kk_s']) > KK_max):
-                            context['kk_b'] = KK_min
-                            context['kk_s'] = KK_max
+                if request.POST['KURANIKERIM_b'] and request.POST['KURANIKERIM_s']:
+                    if type(request.POST['KURANIKERIM_s']) == int or type(request.POST['KURANIKERIM_b']) == int:
+                        if (int(request.POST['KURANIKERIM_b']) > int(request.POST['KURANIKERIM_s'])) or (
+                                int(request.POST['KURANIKERIM_b']) < KURANIKERIM_min or int(
+                            request.POST['KURANIKERIM_s']) > KURANIKERIM_max):
+                            context['KURANIKERIM_b'] = KURANIKERIM_min
+                            context['KURANIKERIM_s'] = KURANIKERIM_max
                     else:
-                        context['kk_b'] = KK_min
-                        context['kk_s'] = KK_max
+                        context['KURANIKERIM_b'] = KURANIKERIM_min
+                        context['KURANIKERIM_s'] = KURANIKERIM_max
                 else:
-                    context['kk_b'] = KK_min
-                    context['kk_s'] = KK_max
+                    context['KURANIKERIM_b'] = KURANIKERIM_min
+                    context['KURANIKERIM_s'] = KURANIKERIM_max
 
-            context['kk_random'] = \
-                KURANIKERIM.objects.filter(sayfa__range=(context['kk_b'], context['kk_s'])).order_by('?')[
+            context['KURANIKERIM_random'] = \
+                KURANIKERIM.objects.filter(sayfa__range=(context['KURANIKERIM_b'], context['KURANIKERIM_s'])).order_by(
+                    '?')[
                     0]
-            context['kk_random'].ayet_no = str(context['kk_random'].ayet_no).replace('1', '١').replace('2',
-                                                                                                       '٢').replace('3',
-                                                                                                                    '٣').replace(
+            context['KURANIKERIM_random'].ayet_no = str(context['KURANIKERIM_random'].ayet_no).replace('1',
+                                                                                                       '١').replace('2',
+                                                                                                                    '٢').replace(
+                '3',
+                '٣').replace(
                 '4', '٤').replace('5', '٥').replace('6', '٦').replace('7', '٧').replace('8', '٨').replace('9',
                                                                                                           '٩').replace(
                 '0', '.')
-            context['kk_random'].sayfa = str(context['kk_random'].sayfa).replace('1', '١').replace('2',
-                                                                                                   '٢').replace('3',
-                                                                                                                '٣').replace(
+            context['KURANIKERIM_random'].sayfa = str(context['KURANIKERIM_random'].sayfa).replace('1', '١').replace(
+                '2',
+                '٢').replace('3',
+                             '٣').replace(
                 '4', '٤').replace('5', '٥').replace('6', '٦').replace('7', '٧').replace('8', '٨').replace('9',
                                                                                                           '٩').replace(
-                '0', '.')
+                '0', '۰')
             return render(request, 'index/index.html', context)
     else:
         if request.user.is_authenticated:
             if Kullanicilar.objects.filter(user=request.user):
                 kullanici = Kullanicilar.objects.filter(user=request.user).last()
-                if kullanici.kk_sayfa_ilk and kullanici.kk_sayfa_son:
-                    context['kk_b'] = kullanici.kk_sayfa_ilk
-                    context['kk_s'] = kullanici.kk_sayfa_son
+                if kullanici.KURANIKERIMSayfaIlk and kullanici.KURANIKERIMSayfaSon:
+                    context['KURANIKERIM_b'] = kullanici.KURANIKERIMSayfaIlk
+                    context['KURANIKERIM_s'] = kullanici.KURANIKERIMSayfaSon
             else:
-                context['kk_b'] = KK_min
-                context['kk_s'] = KK_max
+                context['KURANIKERIM_b'] = KURANIKERIM_min
+                context['KURANIKERIM_s'] = KURANIKERIM_max
 
     return render(request, 'index/index.html', context)
 
-
-def randomsoru(request, randomsoru):
-    session = request.session.session_key
-    if Kullanicilar.objects.filter(session=session):
-        Kullanicilar.objects.get(session=session)
-    context = dict()
-    if randomsoru == 1:
-        context['yasin_random'] = KURANIKERIM.objects.filter(sure_isim='يٰسۤ').order_by('?')[0].ayet
-        context['sure_isim'] = 'يٰسۤ'
-    elif randomsoru == 2:
-        return  # mulk
-    elif randomsoru == 3:
-        return  # nebe
-    elif randomsoru == 4:
-        return  # igra
-    elif randomsoru == 5:
-        return  # beyyine
-    elif randomsoru == 6:
-        return  # duha_alti
-    elif randomsoru == 7:
-        return  # fil_alti
-    elif randomsoru == 8:
-        return  # tecvid
-    elif randomsoru == 9:
-        return  # siyer
-    elif randomsoru == 10:
-        return  # p_arapca
-    elif randomsoru == 11:
-        print('deneme')
-        if request.GET:
-            if User.is_authenticated:
-                print('geldidiiid')
-                kullanici = Kullanicilar.objects.get(user=auth.get_user(request))
-                if request.POST['kk_b'] and request.GET['kk_s']:
-                    context['kk_b'] = request.POST['kk_b']
-                    context['kk_s'] = request.POST['kk_s']
-                else:
-                    context['kk_b'] = kullanici.kk_sayfa_ilk
-                    context['kk_s'] = kullanici.kk_sayfa_son
-                context['kk_random'] = KURANIKERIM.objects.filter(sayfa_end_int__gte=context['kk_b'],
-                                                                  sayfa_begin_int__lte=context['kk_s']).order_by('?')[
-                    0].ayet
-            else:
-                print('gelmediididiid')
-                if request.POST['kk_b'] and request.POST['kk_s']:
-                    context['kk_b'] = request.POST['kk_b']
-                    context['kk_s'] = request.POST['kk_s']
-                else:
-                    context['kk_b'] = 1
-                    context['kk_s'] = 600
-                context['kk_random'] = KURANIKERIM.objects.filter(sayfa_end_int__gte=context['kk_b'],
-                                                                  sayfa_begin_int__lte=context['kk_s']).order_by('?')[
-                    0].ayet
-        else:
-            print('neden burdayım')
-    return redirect(request, 'index/random.html', context)
 
 
 @login_required
@@ -239,7 +202,6 @@ def mufredat(request):
         form = Mufredat(request.POST, instance=gecmis_mufredat)
         if form.is_valid():
             item = form.save(commit=False)
-            item.kk_sayfa_ilk
             item.user = request.user
             item.save()
             return redirect('mufredat')
