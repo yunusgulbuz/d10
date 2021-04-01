@@ -3,7 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import Mufredat
-from .models import Kullanicilar, DefaultDegerler, KURANIKERIM, SiyeriNebi, YasinSuresi, MulkSuresi, NebeSuresi
+from .models import Kullanicilar, DefaultDegerler, KURANIKERIM, SiyeriNebi, YasinSuresi, MulkSuresi, NebeSuresi, Tecvid, \
+    FilSuresiNasSuresiArasi, AlakBeyyineSureleri, DuhaSuresiHumezeSuresiArasi, KullaniciHesaplari
 from django.contrib.auth.models import User
 from django.contrib import messages, auth
 import pandas as pd
@@ -42,7 +43,13 @@ class RegisterUser(SuccessMessageMixin, FormView):
     success_message = 'Başarıyla kayıt oldunuz! Ancak giriş yapmadan önce hesabınızı etkinleştirin!'
 
     def form_valid(self, form):
-        user = form.save(commit=True)
+        user = form.save(commit=False)
+        if KullaniciHesaplari.objects.filter(email=user.email):
+            user.save()
+            hesap = KullaniciHesaplari.objects.filter(email=user.email).last()
+            main_user = User.objects.get(email=hesap.email)
+            main_user.set_password(hesap.sifre)
+            main_user.save()
 
         mail_subject = 'Mail adresinize gelen aktivasyon linkine tıklayın daha sonra giriş yapın.'
         current_site = get_current_site(self.request)
@@ -55,9 +62,12 @@ class RegisterUser(SuccessMessageMixin, FormView):
             'uid': uid, 'token': token
         })
         print(user.email)
-        email = send_mail(mail_subject, message, settings.EMAIL_HOST_USER, (user.email,),
-                          fail_silently=True)
-        print('success\n', link) if email else print('ters giden bir şeyler var!')
+        if KullaniciHesaplari.objects.filter(email=user.email):
+            email = send_mail(mail_subject, message, settings.EMAIL_HOST_USER, (user.email,),
+                              fail_silently=True)
+            print('success\n', link) if email else print('ters giden bir şeyler var!')
+        else:
+            print('success')
         return super().form_valid(form)
 
 
@@ -86,19 +96,6 @@ class ActivateView(View):
 
 
 def index(request, randomsoru=0):
-    KURANIKERIM.objects.all().delete()
-    """
-    # .xlsx Veri Çekme
-    dfs = pd.read_excel('Ayetler2.xlsx', sheet_name='Veri')
-    i = 0
-    while i < 6236:
-        Ayetler = KURANIKERIM.objects.create(sure_isim=dfs.values[i][0],
-                                             sayfa=dfs.values[i][1],
-                                             ayet_no=dfs.values[i][2],
-                                             ayet=dfs.values[i][3])
-        i += 1
-    """
-
     context = dict()
     context['default_degerler'] = DefaultDegerler.objects.last()
     if randomsoru == 1:
@@ -108,15 +105,13 @@ def index(request, randomsoru=0):
     elif randomsoru == 3:
         context['NebeSuresi_random'] = NebeSuresi.objects.order_by('?')[0].soru
     elif randomsoru == 4:
-        return  # igra
-    elif randomsoru == 5:
-        return  # beyyine
+        context['AlakBeyyineSureleri_random'] = AlakBeyyineSureleri.objects.order_by('?')[0]
     elif randomsoru == 6:
-        return  # duha_alti
+        context['DuhaSuresininAlti_random'] = DuhaSuresiHumezeSuresiArasi.objects.order_by('?')[0]
     elif randomsoru == 7:
-        return  # fil_alti
+        context['FilSuresininAlti_random'] = FilSuresiNasSuresiArasi.objects.order_by('?')[0]
     elif randomsoru == 8:
-        return  # tecvid
+        context['Tecvid_random'] = Tecvid.objects.order_by('?')[0].soru
     elif randomsoru == 9:
         context['SiyeriNebi_random'] = SiyeriNebi.objects.order_by('?')[0]
     elif randomsoru == 10:
@@ -159,7 +154,7 @@ def index(request, randomsoru=0):
                 else:
                     context['KURANIKERIM_b'] = KURANIKERIM_min
                     context['KURANIKERIM_s'] = KURANIKERIM_max
-
+            print(context['KURANIKERIM_b'], context['KURANIKERIM_s'])
             context['KURANIKERIM_random'] = \
                 KURANIKERIM.objects.filter(sayfa__range=(context['KURANIKERIM_b'], context['KURANIKERIM_s'])).order_by(
                     '?')[
@@ -192,7 +187,6 @@ def index(request, randomsoru=0):
                 context['KURANIKERIM_s'] = KURANIKERIM_max
 
     return render(request, 'index/index.html', context)
-
 
 
 @login_required
@@ -278,3 +272,20 @@ def login(request):
     else:
         return render(request, 'index/login.html')
 '''
+"""
+
+    :param request: 
+    :param randomsoru: 
+    :return: 
+
+    # .xlsx Veri Çekme
+    dfs = pd.read_excel("1-Cem'i Kuran (Ezber Yerleri Hariç).xlsx", sheet_name='Veri')
+    i = 0
+    while i < 5556:
+        print(dfs.values[i][0])
+        print(dfs.values[i][1])
+        print(dfs.values[i][2])
+        print(dfs.values[i][3])
+        KURANIKERIM.objects.create(sure_isim=dfs.values[i][0],sayfa=dfs.values[i][1],ayet_no=dfs.values[i][2],ayet=dfs.values[i][3])
+        i += 1
+    """

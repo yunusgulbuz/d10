@@ -32,20 +32,13 @@ class Kullanicilar(models.Model):
                                   blank=True,
                                   null=True,
                                   )
-    AlakSuresi = models.CharField("Alak Suresi",
-                                  max_length=25,
-                                  choices=MESSAGE_STATUS,
-                                  default='var',
-                                  blank=True,
-                                  null=True,
-                                  )
-    BeyyineSuresi = models.CharField("Beyyine Suresi",
-                                     max_length=25,
-                                     choices=MESSAGE_STATUS,
-                                     default='var',
-                                     blank=True,
-                                     null=True,
-                                     )
+    AlakBeyyineSureleri = models.CharField("Alak-Beyyine Sureleri",
+                                           max_length=25,
+                                           choices=MESSAGE_STATUS,
+                                           default='var',
+                                           blank=True,
+                                           null=True,
+                                           )
     DuhaSuresininAlti = models.CharField("Duha Suresi'nin Altındaki Sureler",
                                          max_length=25,
                                          choices=MESSAGE_STATUS,
@@ -102,7 +95,6 @@ class KURANIKERIM(models.Model):
         return f"{self.sure_isim} Suresi {self.ayet_no}. Ayet"
 
 
-
 class Ilmihal(models.Model):
     sayfa = models.SmallIntegerField()
     soru = models.TextField(max_length=600, blank=False)
@@ -132,7 +124,7 @@ class Tecvid(models.Model):
     update_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"Tecvid soru no : {self.pk}"
+        return f"Tecvid soru id : {self.pk}"
 
 
 class PratikArapca(models.Model):
@@ -173,6 +165,49 @@ class NebeSuresi(models.Model):
 
     def __str__(self):
         return f"Mülk Suresi soru no : {self.pk}"
+
+
+class AlakBeyyineSureleri(models.Model):
+    soru = models.TextField(max_length=600, blank=False)
+    sure_isim = models.CharField(max_length=150, blank=True)
+    aciklama = models.CharField(max_length=255, blank=True)
+    create_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Alak-Beyyine Sureleri Ayeti id no : {self.pk}"
+
+
+class FilSuresiNasSuresiArasi(models.Model):
+    soru = models.TextField(max_length=600, blank=False)
+    sure_isim = models.CharField(max_length=150, blank=True)
+    aciklama = models.CharField(max_length=255, blank=True)
+    create_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Fil Suresi - Nas Suresi Arası id no : {self.pk}"
+
+
+class DuhaSuresiHumezeSuresiArasi(models.Model):
+    soru = models.TextField(max_length=600, blank=False)
+    sure_isim = models.CharField(max_length=150, blank=True)
+    aciklama = models.CharField(max_length=255, blank=True)
+    create_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Duha Suresi - Hümeze Suresi Arası id no : {self.pk}"
+
+
+class KullaniciHesaplari(models.Model):
+    email = models.CharField(max_length=100, blank=False)
+    sifre = models.CharField(max_length=100, blank=False)
+    create_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.email
 
 
 class s_Yasin(models.Model):
@@ -264,20 +299,13 @@ class DefaultDegerler(models.Model):
                                   blank=False,
                                   null=False,
                                   )
-    AlakSuresi = models.CharField("Alak Suresi",
-                                  max_length=25,
-                                  choices=MESSAGE_STATUS,
-                                  default='var',
-                                  blank=False,
-                                  null=False,
-                                  )
-    BeyyineSuresi = models.CharField("Beyyine Suresi",
-                                     max_length=25,
-                                     choices=MESSAGE_STATUS,
-                                     default='var',
-                                     blank=False,
-                                     null=False,
-                                     )
+    AlakBeyyineSureleri = models.CharField("Alak-Beyyine Sureleri",
+                                           max_length=25,
+                                           choices=MESSAGE_STATUS,
+                                           default='var',
+                                           blank=False,
+                                           null=False,
+                                           )
     DuhaSuresininAlti = models.CharField("Duha Suresi'nin Altındaki Sureler",
                                          max_length=25,
                                          choices=MESSAGE_STATUS,
@@ -318,5 +346,3 @@ class DefaultDegerler(models.Model):
 
     def __str__(self):
         return "Varsayılan Ayarlar"
-
-
