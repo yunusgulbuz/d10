@@ -50,6 +50,10 @@
                 <li class="active"><a href="{% url 'index' %}">Anasayfa</a></li>
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'mufredat' %}">Müfredat</a></li>
+                    {% if user.is_superuser %}
+                        <li><a href="/admin/">Admin Paneli</a></li>
+                    {% endif %}
+
                 {% else %}
                     <li><a href="{% url 'login' %}">Müfredat</a></li>
                 {% endif %}
