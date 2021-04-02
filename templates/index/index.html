@@ -85,10 +85,33 @@
                                                 Sureler</a>
                                         </li>
                                     {% endif %}
+                                    {% if default_degerler.BastanAlaSuresiArasi == 'var' %}
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="one-tab" data-toggle="tab"
+                                               href="#BastanAlaSuresiArasi"
+                                               role="tab"
+                                               aria-controls="One" aria-selected="true">Baştan A'la Suresine Kadar</a>
+                                        </li>
+                                    {% endif %}
+                                    {% if default_degerler.AlaSuresiLeylSuresiArasi == 'var' %}
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="one-tab" data-toggle="tab"
+                                               href="#AlaSuresiLeylSuresiArasi"
+                                               role="tab"
+                                               aria-controls="One" aria-selected="true">A'la Suresi Leyl Suresi
+                                                Arası</a>
+                                        </li>
+                                    {% endif %}
                                     {% if default_degerler.Tecvid == 'var' %}
                                         <li class="nav-item">
                                             <a class="nav-link" id="one-tab" data-toggle="tab" href="#Tecvid" role="tab"
                                                aria-controls="One" aria-selected="true">Tecvid</a>
+                                        </li>
+                                    {% endif %}
+                                    {% if default_degerler.Dualar == 'var' %}
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="one-tab" data-toggle="tab" href="#Dualar" role="tab"
+                                               aria-controls="One" aria-selected="true">Dualar</a>
                                         </li>
                                     {% endif %}
                                     {% if default_degerler.SiyeriNebi == 'var' %}
@@ -96,6 +119,13 @@
                                             <a class="nav-link" id="one-tab" data-toggle="tab" href="#SiyeriNebi"
                                                role="tab"
                                                aria-controls="One" aria-selected="true">Siyer-i Nebi</a>
+                                        </li>
+                                    {% endif %}
+                                    {% if default_degerler.Ilmihal == 'var' %}
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="one-tab" data-toggle="tab" href="#Ilmihal"
+                                               role="tab"
+                                               aria-controls="One" aria-selected="true">İlmihal</a>
                                         </li>
                                     {% endif %}
                                     {% if default_degerler.PratikArapca == 'var' %}
@@ -118,11 +148,10 @@
                         </style>
                         <div class="tab-content" id="myTabContent">
                             {% if default_degerler.KURANIKERIM == 'var' %}
-                                <div class="tab-pane fade {% if KURANIKERIM_random %}show active{% endif %} p-3"
+                                <div class="tab-pane fade {% if KURANIKERIM_random %}show active{% endif %}"
                                      id="KURANIKERIM"
                                      role="tabpanel"
                                      aria-labelledby="one-tab">
-                                    <p class="card-text">
                                     <div class="container mt-5">
                                         {% if KURANIKERIM_random %}
                                             <head>
@@ -140,10 +169,16 @@
                                                     <h1 style="
                                                     line-height: 60px;
                                                     font-size: 30px;
-                                                    font-family: 'Amiri', serif;">{{ KURANIKERIM_random.ayet | truncatewords:5 }}</h1>
+                                                    font-family: 'Amiri', serif;">
+                                                        <strong style="
+                                                    font-size: 20px;
+                                                    font-family: 'Amiri', serif;">استعيد
+                                                            بالله؛ </strong>
+                                                        <br>{{ KURANIKERIM_random.ayet | truncatewords:5 }}
+                                                    </h1>
                                                     <br>
-                                                    <h1 style="
-                                                    font-size: 40px;
+                                                    <h1 class="text-right" style="
+                                                    font-size: 25px;
                                                     font-family: 'Amiri', serif;">{{ KURANIKERIM_random.sayfa }}</h1>
                                                 </div>
                                             </div>
@@ -183,10 +218,8 @@
                                                     Başla
                                                 </button>
                                             {% endif %}
-
                                         </form>
                                     </div>
-                                    </p>
                                 </div>
                             {% endif %}
                             {% if default_degerler.YasinSuresi == 'var' %}
@@ -208,7 +241,12 @@
                                                     <h1 style="
                                                     line-height: 60px;
                                                     font-size: 30px;
-                                                    font-family: 'Amiri', serif;">{{ YasinSuresi_random }}</h1>
+                                                    font-family: 'Amiri', serif;"><strong style="
+                                                    font-size: 20px;
+                                                    font-family: 'Amiri', serif;">استعيد
+                                                        بالله؛ </strong>
+                                                        <br>
+                                                        {{ YasinSuresi_random }}</h1>
                                                 </div>
                                             </div>
                                             </body>
@@ -240,7 +278,13 @@
                                                     <h1 style="
                                                     line-height: 60px;
                                                     font-size: 30px;
-                                                    font-family: 'Amiri', serif;">{{ MulkSuresi_random }}</h1>
+                                                    font-family: 'Amiri', serif;">
+                                                        <strong style="
+                                                    font-size: 20px;
+                                                    font-family: 'Amiri', serif;">استعيد
+                                                            بالله؛ </strong>
+                                                        <br>
+                                                        {{ MulkSuresi_random }}</h1>
                                                 </div>
                                             </div>
                                             </body>
@@ -273,7 +317,13 @@
                                                     <h1 style="
                                                     line-height: 60px;
                                                     font-size: 30px;
-                                                    font-family: 'Amiri', serif;">{{ NebeSuresi_random }}</h1>
+                                                    font-family: 'Amiri', serif;">
+                                                        <strong style="
+                                                    font-size: 20px;
+                                                    font-family: 'Amiri', serif;">استعيد
+                                                            بالله؛ </strong>
+                                                        <br>
+                                                        {{ NebeSuresi_random }}</h1>
                                                 </div>
                                             </div>
                                             </body>
@@ -313,7 +363,13 @@
                                                     <h1 style="
                                                     line-height: 60px;
                                                     font-size: 30px;
-                                                    font-family: 'Amiri', serif;">{{ AlakBeyyineSureleri_random.soru }}</h1>
+                                                    font-family: 'Amiri', serif;">
+                                                        <strong style="
+                                                    font-size: 20px;
+                                                    font-family: 'Amiri', serif;">استعيد
+                                                            بالله؛ </strong>
+                                                        <br>
+                                                        {{ AlakBeyyineSureleri_random.soru }}</h1>
                                                 </div>
                                             </div>
                                             </body>
@@ -402,6 +458,98 @@
                                            class="btn btn btn-outline-info btn-lg btn-block ">Başla</a>
                                     {% endif %}                                 </div>
                             {% endif %}
+                            {% if default_degerler.BastanAlaSuresiArasi %}
+                                <div class="tab-pane fade {% if BastanAlaSuresiArasi_random %}show active{% endif %} p-3"
+                                     id="BastanAlaSuresiArasi"
+                                     role="tabpanel"
+                                     aria-labelledby="one-tab">
+                                    <p class="card-text">
+                                    <div class="container mt-5">
+                                        {% if BastanAlaSuresiArasi_random %}
+                                            <head>
+                                                <link rel="preconnect" href="https://fonts.gstatic.com">
+                                                <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap"
+                                                      rel="stylesheet">
+                                            </head>
+                                            <body>
+                                            <div class="jumbotron">
+                                                <div class="container">
+                                                    <h4 style="
+                                                    line-height: 60px;
+                                                    font-size: 30px;
+                                                    font-family: 'Amiri', serif;">
+                                                        ﴾ {{ BastanAlaSuresiArasi_random.sure_isim }} ﴿</h4>
+                                                    <br>
+                                                    <h1 style="
+                                                    line-height: 60px;
+                                                    font-size: 30px;
+                                                    font-family: 'Amiri', serif;">
+                                                        <strong style="
+                                                    font-size: 20px;
+                                                    font-family: 'Amiri', serif;">استعيد
+                                                            بالله؛ </strong>
+                                                        <br>
+                                                        {{ BastanAlaSuresiArasi_random.soru }}</h1>
+                                                </div>
+                                            </div>
+                                            </body>
+                                        {% endif %}
+                                    </div>
+                                    </p>
+                                    {% if BastanAlaSuresiArasi_random %}
+                                        <a href="{% url 'randomsoru' 5 %}"
+                                           class="btn btn btn-outline-info btn-lg btn-block ">Yenile</a>
+                                    {% else %}
+                                        <a href="{% url 'randomsoru' 5 %}"
+                                           class="btn btn btn-outline-info btn-lg btn-block ">Başla</a>
+                                    {% endif %}                                 </div>
+                            {% endif %}
+                            {% if default_degerler.AlaSuresiLeylSuresiArasi %}
+                                <div class="tab-pane fade {% if AlaSuresiLeylSuresiArasi_random %}show active{% endif %} p-3"
+                                     id="AlaSuresiLeylSuresiArasi"
+                                     role="tabpanel"
+                                     aria-labelledby="one-tab">
+                                    <p class="card-text">
+                                    <div class="container mt-5">
+                                        {% if AlaSuresiLeylSuresiArasi_random %}
+                                            <head>
+                                                <link rel="preconnect" href="https://fonts.gstatic.com">
+                                                <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap"
+                                                      rel="stylesheet">
+                                            </head>
+                                            <body>
+                                            <div class="jumbotron">
+                                                <div class="container">
+                                                    <h4 style="
+                                                    line-height: 60px;
+                                                    font-size: 30px;
+                                                    font-family: 'Amiri', serif;">
+                                                        ﴾ {{ AlaSuresiLeylSuresiArasi_random.sure_isim }} ﴿</h4>
+                                                    <br>
+                                                    <h1 style="
+                                                    line-height: 60px;
+                                                    font-size: 30px;
+                                                    font-family: 'Amiri', serif;">
+                                                        <strong style="
+                                                    font-size: 20px;
+                                                    font-family: 'Amiri', serif;">استعيد
+                                                            بالله؛ </strong>
+                                                        <br>
+                                                        {{ AlaSuresiLeylSuresiArasi_random.soru }}</h1>
+                                                </div>
+                                            </div>
+                                            </body>
+                                        {% endif %}
+                                    </div>
+                                    </p>
+                                    {% if AlaSuresiLeylSuresiArasi_random %}
+                                        <a href="{% url 'randomsoru' 12 %}"
+                                           class="btn btn btn-outline-info btn-lg btn-block ">Yenile</a>
+                                    {% else %}
+                                        <a href="{% url 'randomsoru' 12 %}"
+                                           class="btn btn btn-outline-info btn-lg btn-block ">Başla</a>
+                                    {% endif %}                                 </div>
+                            {% endif %}
                             {% if default_degerler.Tecvid %}
                                 <div class="tab-pane fade {% if Tecvid_random %}show active{% endif %} p-3"
                                      id="Tecvid" role="tabpanel" aria-labelledby="two-tab">
@@ -434,6 +582,38 @@
                                            class="btn btn btn-outline-info btn-lg btn-block ">Başla</a>
                                     {% endif %}                            </div>
                             {% endif %}
+                            {% if default_degerler.Dualar %}
+                                <div class="tab-pane fade {% if Dualar_random %}show active{% endif %} p-3"
+                                     id="Dualar" role="tabpanel" aria-labelledby="two-tab">
+                                    <p class="card-text">
+                                    <div class="container mt-5">
+                                        {% if Dualar_random %}
+                                            <head>
+                                                <link rel="preconnect" href="https://fonts.gstatic.com">
+                                                <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&display=swap"
+                                                      rel="stylesheet">
+                                            </head>
+                                            <body>
+                                            <div class="jumbotron">
+                                                <div class="container">
+                                                    <h1 style="
+                                                    line-height: 60px;
+                                                    font-size: 30px;
+                                                    font-family: 'Amiri', serif;">{{ Dualar_random }}</h1>
+                                                </div>
+                                            </div>
+                                            </body>
+                                        {% endif %}
+                                    </div>
+                                    </p>
+                                    {% if Dualar_random %}
+                                        <a href="{% url 'randomsoru' 13 %}"
+                                           class="btn btn btn-outline-info btn-lg btn-block ">Yenile</a>
+                                    {% else %}
+                                        <a href="{% url 'randomsoru' 13 %}"
+                                           class="btn btn btn-outline-info btn-lg btn-block ">Başla</a>
+                                    {% endif %}                            </div>
+                            {% endif %}
                             {% if default_degerler.SiyeriNebi %}
                                 <div class="tab-pane fade p-3 {% if SiyeriNebi_random %}show active {% endif %}"
                                      id="SiyeriNebi"
@@ -462,6 +642,42 @@
                                            class="btn btn btn-outline-info btn-lg btn-block ">Yenile</a>
                                     {% else %}
                                         <a href="{% url 'randomsoru' 9 %}"
+                                           class="btn btn btn-outline-info btn-lg btn-block ">Başla</a>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                            {% if default_degerler.Ilmihal %}
+                                <div class="tab-pane fade p-3 {% if Ilmihal_random %}show active {% endif %}"
+                                     id="Ilmihal"
+                                     role="tabpanel" aria-labelledby="three-tab">
+                                    <p class="card-text">
+                                    <div class="container mt-5">
+                                        {% if Ilmihal_random %}
+                                            <head>
+                                                <link rel="preconnect" href="https://fonts.gstatic.com">
+                                                <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500&display=swap"
+                                                      rel="stylesheet">
+                                            </head>
+                                            <body>
+                                            <div class="jumbotron">
+                                                <div class="container">
+                                                    <h1 style="font-family: 'Baloo 2', cursive;">{{ Ilmihal_random.soru }}</h1>
+                                                    <br>
+                                                    <h1 class="text-right" style="
+                                                    font-size: 25px;
+                                                    font-family: 'Baloo 2', cursive;">{{ Ilmihal_random.sayfa }}</h1>
+                                                </div>
+                                            </div>
+
+                                            </body>
+                                        {% endif %}
+                                    </div>
+                                    </p>
+                                    {% if Ilmihal_random %}
+                                        <a href="{% url 'randomsoru' 14 %}"
+                                           class="btn btn btn-outline-info btn-lg btn-block ">Yenile</a>
+                                    {% else %}
+                                        <a href="{% url 'randomsoru' 14 %}"
                                            class="btn btn btn-outline-info btn-lg btn-block ">Başla</a>
                                     {% endif %}
                                 </div>

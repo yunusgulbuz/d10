@@ -4,7 +4,8 @@ from django.core.mail import send_mail
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import Mufredat
 from .models import Kullanicilar, DefaultDegerler, KURANIKERIM, SiyeriNebi, YasinSuresi, MulkSuresi, NebeSuresi, Tecvid, \
-    FilSuresiNasSuresiArasi, AlakBeyyineSureleri, DuhaSuresiHumezeSuresiArasi, KullaniciHesaplari
+    FilSuresiNasSuresiArasi, AlakBeyyineSureleri, DuhaSuresiHumezeSuresiArasi, KullaniciHesaplari, BastanAlaSuresiArasi, \
+    AlaSuresiLeylSuresiArasi, Dualar, Ilmihal
 from django.contrib.auth.models import User
 from django.contrib import messages, auth
 import pandas as pd
@@ -96,6 +97,15 @@ class ActivateView(View):
 
 
 def index(request, randomsoru=0):
+    # YasinSuresi.objects.all().delete()
+    # .xlsx Veri Çekme
+    dfs = pd.read_excel("11-İlm-i Hal.xlsx", sheet_name='Sayfa1', header=0)
+    i = 0
+    while i < 25:
+        print(dfs.values[i][1])
+        # Ilmihal.objects.create(soru=dfs.values[i][1],sayfa=dfs.values[i][2])
+        i += 1
+
     context = dict()
     context['default_degerler'] = DefaultDegerler.objects.last()
     if randomsoru == 1:
@@ -106,6 +116,8 @@ def index(request, randomsoru=0):
         context['NebeSuresi_random'] = NebeSuresi.objects.order_by('?')[0].soru
     elif randomsoru == 4:
         context['AlakBeyyineSureleri_random'] = AlakBeyyineSureleri.objects.order_by('?')[0]
+    elif randomsoru == 5:
+        context['BastanAlaSuresiArasi_random'] = BastanAlaSuresiArasi.objects.order_by('?')[0]
     elif randomsoru == 6:
         context['DuhaSuresininAlti_random'] = DuhaSuresiHumezeSuresiArasi.objects.order_by('?')[0]
     elif randomsoru == 7:
@@ -166,7 +178,7 @@ def index(request, randomsoru=0):
                 '٣').replace(
                 '4', '٤').replace('5', '٥').replace('6', '٦').replace('7', '٧').replace('8', '٨').replace('9',
                                                                                                           '٩').replace(
-                '0', '.')
+                '0', '۰')
             context['KURANIKERIM_random'].sayfa = str(context['KURANIKERIM_random'].sayfa).replace('1', '١').replace(
                 '2',
                 '٢').replace('3',
@@ -175,6 +187,12 @@ def index(request, randomsoru=0):
                                                                                                           '٩').replace(
                 '0', '۰')
             return render(request, 'index/index.html', context)
+    elif randomsoru == 12:
+        context['AlaSuresiLeylSuresiArasi_random'] = AlaSuresiLeylSuresiArasi.objects.order_by('?')[0]
+    elif randomsoru == 13:
+        context['Dualar_random'] = Dualar.objects.order_by('?')[0].soru
+    elif randomsoru == 14:
+        context['Ilmihal_random'] = Ilmihal.objects.order_by('?')[0]
     else:
         if request.user.is_authenticated:
             if Kullanicilar.objects.filter(user=request.user):

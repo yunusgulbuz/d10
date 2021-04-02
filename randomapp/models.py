@@ -200,6 +200,40 @@ class DuhaSuresiHumezeSuresiArasi(models.Model):
         return f"Duha Suresi - Hümeze Suresi Arası id no : {self.pk}"
 
 
+class BastanAlaSuresiArasi(models.Model):
+    soru = models.TextField(max_length=600, blank=False)
+    sure_isim = models.CharField(max_length=150, blank=True)
+    ayet_no = models.SmallIntegerField(blank=True, null=True)
+    aciklama = models.CharField(max_length=255, blank=True)
+    create_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Baştan A'la Suresi Arası id no : {self.pk}"
+
+
+class AlaSuresiLeylSuresiArasi(models.Model):
+    soru = models.TextField(max_length=600, blank=False)
+    sure_isim = models.CharField(max_length=150, blank=True)
+    ayet_no = models.SmallIntegerField(blank=True, null=True)
+    aciklama = models.CharField(max_length=255, blank=True)
+    create_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"A'la Suresi Leyl Suresi Arası id no : {self.pk}"
+
+
+class Dualar(models.Model):
+    soru = models.TextField(max_length=600, blank=False)
+    aciklama = models.CharField(max_length=255, blank=True)
+    create_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Dua soru id : {self.pk}"
+
+
 class KullaniciHesaplari(models.Model):
     email = models.CharField(max_length=100, blank=False)
     sifre = models.CharField(max_length=100, blank=False)
@@ -278,6 +312,13 @@ class DefaultDegerler(models.Model):
                                    blank=False,
                                    null=False,
                                    )
+    Ilmihal = models.CharField("İlmihal",
+                               max_length=25,
+                               choices=MESSAGE_STATUS,
+                               default='var',
+                               blank=False,
+                               null=False,
+                               )
     YasinSuresi = models.CharField("Yasin Suresi",
                                    max_length=25,
                                    choices=MESSAGE_STATUS,
@@ -341,6 +382,27 @@ class DefaultDegerler(models.Model):
                                     blank=False,
                                     null=False,
                                     )
+    BastanAlaSuresiArasi = models.CharField("Baştan A'la Suresine Kadar Olan Sureler",
+                                            max_length=25,
+                                            choices=MESSAGE_STATUS,
+                                            default='var',
+                                            blank=False,
+                                            null=False,
+                                            )
+    AlaSuresiLeylSuresiArasi = models.CharField("A'la Suresi Leyl Suresi Arası Sureler",
+                                                max_length=25,
+                                                choices=MESSAGE_STATUS,
+                                                default='var',
+                                                blank=False,
+                                                null=False,
+                                                )
+    Dualar = models.CharField("Dualar",
+                              max_length=25,
+                              choices=MESSAGE_STATUS,
+                              default='var',
+                              blank=False,
+                              null=False,
+                              )
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
