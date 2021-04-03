@@ -49,16 +49,39 @@
 
                 <li class="active"><a href="{% url 'index' %}">Anasayfa</a></li>
                 {% if user.is_authenticated %}
-                    <li><a href="{% url 'mufredat' %}">Müfredat</a></li>
-                    {% if user.is_superuser %}
-                        <li><a href="/admin/">Admin Paneli</a></li>
+                    {% if default_degerler %}
+                        {% if default_degerler.KURANIKERIM == 'var' %}
+                            <li><a href="{% url 'kiraat' 11 %}">Yüzüne</a></li>
+                        {% endif %}
                     {% endif %}
+                    {% if default_degerler %}
+                        {% if default_degerler.YasinSuresi == 'var' or default_degerler.MulkSuresi == 'var' or default_degerler.NebeSuresi == 'var' or default_degerler.AlakBeyyineSureleri == 'var' or default_degerler.DuhaSuresininAlti == 'var' or default_degerler.FilSuresininAlti == 'var' or default_degerler.BastanAlaSuresiArasi == 'var' or default_degerler.AlaSuresiLeylSuresiArasi == 'var' %}
+                            <li><a href="{% url 'ezber' 0 %}">Ezber</a></li>
+                        {% endif %}
+                    {% endif %}
+                    {% if default_degerler %}
+                        {% if default_degerler.Tecvid == 'var' %}
+                            <li><a href="{% url 'tecvid' 0 %}">Tecvid</a></li>
+                        {% endif %}
+                    {% endif %}
+                    {% if default_degerler %}
+                        {% if default_degerler.Ilmihal == 'var' %}
+                            <li><a href="{% url 'ilmihal_siyer_dua' 0 %}">İlmi-hal</a></li>
+                        {% elif default_degerler.SiyeriNebi == 'var' %}
+                            <li><a href="{% url 'ilmihal_siyer_dua' 0 %}">Siyer</a></li>
+                        {% elif default_degerler.Dualar == 'var' %}
+                            <li><a href="{% url 'ilmihal_siyer_dua' 0 %}">Dualar</a></li>
+                        {% endif %}
+                    {% endif %}
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'mufredat' %}">Müfredat</a></li>
+                        {% if user.is_superuser %}
+                            <li><a href="/admin/">Admin Paneli</a></li>
+                        {% endif %}
 
-                {% else %}
-                    <li><a href="{% url 'login' %}">Müfredat</a></li>
-                {% endif %}
-
-                {% if user.is_authenticated %}
+                    {% else %}
+                        <li><a href="{% url 'login' %}">Müfredat</a></li>
+                    {% endif %}
                     <li class="p-1">
                         <a href="javascript:{document.getElementById('logout').submit()}"
                            class="nav-link">({{ user.username }}) Çıkış</a>

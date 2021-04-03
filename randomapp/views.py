@@ -1,6 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
+from django.db.models import F
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import Mufredat
 from .models import Kullanicilar, DefaultDegerler, KURANIKERIM, SiyeriNebi, YasinSuresi, MulkSuresi, NebeSuresi, Tecvid, \
@@ -79,7 +80,6 @@ class LoginUserView(SuccessMessageMixin, LoginView):
 
 
 class ActivateView(View):
-
     def get(self, request, uidb64, token):
         try:
             uid = force_text(urlsafe_base64_decode(uidb64))
@@ -96,16 +96,129 @@ class ActivateView(View):
             return HttpResponse('The link is invalid sorry!')
 
 
-def index(request, randomsoru=0):
-    # YasinSuresi.objects.all().delete()
-    # .xlsx Veri Çekme
-    dfs = pd.read_excel("11-İlm-i Hal.xlsx", sheet_name='Sayfa1', header=0)
-    i = 0
-    while i < 25:
-        print(dfs.values[i][1])
-        # Ilmihal.objects.create(soru=dfs.values[i][1],sayfa=dfs.values[i][2])
-        i += 1
+@login_required
+def yuzune(request, randomsoru=0):
+    context = dict()
+    context['default_degerler'] = DefaultDegerler.objects.last()
+    if randomsoru == 11:
+        if request.POST:
+            if request.user.is_authenticated:
+                kullanici = Kullanicilar.objects.filter(user=request.user).last()
+                if request.POST['KURANIKERIM_b'] and request.POST['KURANIKERIM_s']:
+                    if str(request.POST['KURANIKERIM_s']).isdigit() and str(request.POST['KURANIKERIM_b']).isdigit():
+                        if (int(request.POST['KURANIKERIM_b']) > int(request.POST['KURANIKERIM_s'])) or (
+                                int(request.POST['KURANIKERIM_b']) < KURANIKERIM_min or int(
+                            request.POST['KURANIKERIM_s']) > KURANIKERIM_max):
+                            context['KURANIKERIM_b'] = KURANIKERIM_min
+                            context['KURANIKERIM_s'] = KURANIKERIM_max
+                        else:
+                            context['KURANIKERIM_b'] = request.POST['KURANIKERIM_b']
+                            context['KURANIKERIM_s'] = request.POST['KURANIKERIM_s']
+                    else:
+                        context['KURANIKERIM_b'] = KURANIKERIM_min
+                        context['KURANIKERIM_s'] = KURANIKERIM_max
+                else:
+                    if kullanici:
+                        context['KURANIKERIM_b'] = kullanici.KURANIKERIMSayfaIlk
+                        context['KURANIKERIM_s'] = kullanici.KURANIKERIMSayfaSon
+                    else:
+                        context['KURANIKERIM_b'] = KURANIKERIM_min
+                        context['KURANIKERIM_s'] = KURANIKERIM_max
+            else:
+                if request.POST['KURANIKERIM_b'] and request.POST['KURANIKERIM_s']:
+                    if type(request.POST['KURANIKERIM_s']) == int or type(request.POST['KURANIKERIM_b']) == int:
+                        if (int(request.POST['KURANIKERIM_b']) > int(request.POST['KURANIKERIM_s'])) or (
+                                int(request.POST['KURANIKERIM_b']) < KURANIKERIM_min or int(
+                            request.POST['KURANIKERIM_s']) > KURANIKERIM_max):
+                            context['KURANIKERIM_b'] = KURANIKERIM_min
+                            context['KURANIKERIM_s'] = KURANIKERIM_max
+                    else:
+                        context['KURANIKERIM_b'] = KURANIKERIM_min
+                        context['KURANIKERIM_s'] = KURANIKERIM_max
+                else:
+                    context['KURANIKERIM_b'] = KURANIKERIM_min
+                    context['KURANIKERIM_s'] = KURANIKERIM_max
+            print(context['KURANIKERIM_b'], context['KURANIKERIM_s'])
+            context['KURANIKERIM_random'] = \
+                KURANIKERIM.objects.filter(sayfa__range=(context['KURANIKERIM_b'], context['KURANIKERIM_s'])).order_by(
+                    '?')[
+                    0]
+            context['KURANIKERIM_random'].ayet_no = str(context['KURANIKERIM_random'].ayet_no).replace('1',
+                                                                                                       '١').replace('2',
+                                                                                                                    '٢').replace(
+                '3',
+                '٣').replace(
+                '4', '٤').replace('5', '٥').replace('6', '٦').replace('7', '٧').replace('8', '٨').replace('9',
+                                                                                                          '٩').replace(
+                '0', '۰')
+            context['KURANIKERIM_random'].sayfa = str(context['KURANIKERIM_random'].sayfa).replace('1', '١').replace(
+                '2',
+                '٢').replace('3',
+                             '٣').replace(
+                '4', '٤').replace('5', '٥').replace('6', '٦').replace('7', '٧').replace('8', '٨').replace('9',
+                                                                                                          '٩').replace(
+                '0', '۰')
+            return render(request, 'index/yuzune.html', context)
+    else:
+        if request.user.is_authenticated:
+            if Kullanicilar.objects.filter(user=request.user):
+                kullanici = Kullanicilar.objects.filter(user=request.user).last()
+                if kullanici.KURANIKERIMSayfaIlk and kullanici.KURANIKERIMSayfaSon:
+                    context['KURANIKERIM_b'] = kullanici.KURANIKERIMSayfaIlk
+                    context['KURANIKERIM_s'] = kullanici.KURANIKERIMSayfaSon
+            else:
+                context['KURANIKERIM_b'] = KURANIKERIM_min
+                context['KURANIKERIM_s'] = KURANIKERIM_max
+    return render(request, 'index/yuzune.html', context)
 
+
+@login_required
+def ezber(request, randomsoru=0):
+    context = dict()
+    context['default_degerler'] = DefaultDegerler.objects.last()
+    if randomsoru == 1:
+        context['YasinSuresi_random'] = YasinSuresi.objects.order_by('?')[0].soru
+    elif randomsoru == 2:
+        context['MulkSuresi_random'] = MulkSuresi.objects.order_by('?')[0].soru
+    elif randomsoru == 3:
+        context['NebeSuresi_random'] = NebeSuresi.objects.order_by('?')[0].soru
+    elif randomsoru == 4:
+        context['AlakBeyyineSureleri_random'] = AlakBeyyineSureleri.objects.order_by('?')[0]
+    elif randomsoru == 5:
+        context['BastanAlaSuresiArasi_random'] = BastanAlaSuresiArasi.objects.order_by('?')[0]
+    elif randomsoru == 6:
+        context['DuhaSuresininAlti_random'] = DuhaSuresiHumezeSuresiArasi.objects.order_by('?')[0]
+    elif randomsoru == 7:
+        context['FilSuresininAlti_random'] = FilSuresiNasSuresiArasi.objects.order_by('?')[0]
+    elif randomsoru == 12:
+        context['AlaSuresiLeylSuresiArasi_random'] = AlaSuresiLeylSuresiArasi.objects.order_by('?')[0]
+    return render(request, 'index/ezber.html', context)
+
+
+@login_required
+def tecvid(request, randomsoru=0):
+    context = dict()
+
+    if randomsoru == 8:
+        context['Tecvid_random'] = Tecvid.objects.order_by('?')[0].soru
+    return render(request, 'index/tecvid.html', context)
+
+
+@login_required
+def ilmihal_siyer_dua(request, randomsoru=0):
+    context = dict()
+    context['default_degerler'] = DefaultDegerler.objects.last()
+    if randomsoru == 9:
+        context['SiyeriNebi_random'] = SiyeriNebi.objects.order_by('?')[0]
+    elif randomsoru == 13:
+        context['Dualar_random'] = Dualar.objects.order_by('?')[0].soru
+    elif randomsoru == 14:
+        context['Ilmihal_random'] = Ilmihal.objects.order_by('?')[0]
+    return render(request, 'index/ilmihal_siyer_dua.html', context)
+
+
+@login_required
+def index(request, randomsoru=0):
     context = dict()
     context['default_degerler'] = DefaultDegerler.objects.last()
     if randomsoru == 1:
@@ -222,6 +335,7 @@ def mufredat(request):
     return render(request, 'index/mufredat.html', {'form': form})
 
 
+@login_required
 def logout(request):
     if request.method == 'POST':
         auth.logout(request)

@@ -10,4 +10,9 @@ urlpatterns = [
     path('logout/', views.logout, name='logout'),
     path('activate/<uidb64>/<token>/', views.ActivateView.as_view(), name='activate'),
 
+    path('yuzune/<int:randomsoru>', views.yuzune, name='kiraat'),
+    path('ezber/<int:randomsoru>', views.ezber, name='ezber'),
+    path('tecvid/<int:randomsoru>', views.tecvid, name='tecvid'),
+    path('ilmihal_siyer_dua/<int:randomsoru>', views.ilmihal_siyer_dua, name='ilmihal_siyer_dua'),
+
 ]
