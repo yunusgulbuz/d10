@@ -1,24 +1,6 @@
 {% load static %}
 <link href={% static "assets/vendor/bootstrap/css/bootstrap.min.css" %} rel="stylesheet">
 <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,300' rel='stylesheet' type='text/css'>
-{% if messages %}
-    <div class="container mt-5">
-        <div class="row pt-3">
-            {% for message in messages %}
-                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %} alert-dismissible show col-12 "
-                     role="alert">
-                    <p>
-                        {{ message }}
-                    </p>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-
-            {% endfor %}
-        </div>
-    </div>
-{% endif %}
 <script>openForm();</script>
 <div id="mainButton">
     <div class="btn-text" onclick="openForm()">KAYIT OL</div>
@@ -43,7 +25,7 @@
             <label for="password">Yeniden Şifre</label>
         </div>
         <button class="form-button" onclick="" type="submit">ONAYLA</button>
-        <a class="codepen-by" href="{% url 'login' %}">GİRİŞ YAP</a>
+        <a class="mt-5" href="{% url 'login' %}">Giriş Yap</a>
     </form>
 </div>
 
@@ -52,6 +34,7 @@
         margin: 0;
         padding: 0;
         box-sizing: border-box;
+
     }
 
     body {
@@ -63,6 +46,7 @@
         font-family: 'Raleway';
         justify-content: center;
         background-color: #fbfbfb;
+        transform: scale(1.2, 1.2);
     }
 
     #mainButton {

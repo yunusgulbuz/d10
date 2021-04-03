@@ -3,10 +3,11 @@
 <link href='https://fonts.googleapis.com/css?family=Raleway:400,500,300' rel='stylesheet' type='text/css'>
 <div id="mainButton">
     <div class="btn-text" onclick="openForm()">GİRİŞ YAP</div>
+
     <form class="modal" action="{% url 'login' %}" method="post">
         {% csrf_token %}
         <div class="close-button" onclick="closeForm()">x</div>
-        <div class="form-title">GİRİŞ Yap</div>
+        <div class="form-title text-center">GİRİŞ Yap</div>
         <div class="input-group">
             {{ form.username }}
             <label for="name">Kullanıcı Adı veya Email</label>
@@ -16,7 +17,7 @@
             <label for="password">Şifre</label>
         </div>
         <button class="form-button" onclick="closeForm()" type="submit">GİRİŞ</button>
-        <a class="codepen-by" href="{% url 'register' %}">KAYIT OL</a>
+    <a class="mt-5" href="{% url 'register' %}">Kayıt ol</a>
     </form>
 
 </div>
@@ -37,12 +38,14 @@
         font-family: 'Raleway';
         justify-content: center;
         background-color: #fbfbfb;
+        transform: scale(1.5, 1.5);
     }
 
     #mainButton {
         color: white;
         border: none;
         outline: none;
+        width: 50%;
         font-size: 24px;
         font-weight: 200;
         overflow: hidden;
@@ -62,6 +65,8 @@
     #mainButton .btn-text {
         z-index: 2;
         display: block;
+        text-align: center;
+        margin: auto;
         padding: 10px 20px;
         position: relative;
     }
@@ -113,7 +118,7 @@
         -moz-transform: scale(1, 1);
         -ms-transform: scale(1, 1);
         -o-transform: scale(1, 1);
-        transform: scale(1, 1);
+
     }
 
     #mainButton .modal {
@@ -255,7 +260,7 @@
     var openForm = function () {
         button.className = 'active';
     };
-
+    openForm();
     var checkInput = function (input) {
         if (input.value.length > 0) {
             input.className = 'active';
