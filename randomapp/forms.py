@@ -46,6 +46,8 @@ class Mufredat(forms.ModelForm):
     class Meta:
         model = Kullanicilar
         fields = [
+            'KURANIKERIM',
+            'Ilmihal',
             'KURANIKERIMSayfaIlk',
             'KURANIKERIMSayfaSon',
             'IlmihalIlk',
@@ -59,9 +61,14 @@ class Mufredat(forms.ModelForm):
             'Tecvid',
             'SiyeriNebi',
             'PratikArapca',
+            'BastanAlaSuresiArasi',
+            'AlaSuresiLeylSuresiArasi',
+            'Dualar',
 
         ]
         labels = {
+            'KURANIKERIM': "KUR'AN-I KERİM",
+            'Ilmihal': "İlmihal",
             'KURANIKERIMSayfaIlk': "Kur'an-ı Kerim sayfası başlangıç",
             'KURANIKERIMSayfaSon': "Kur'an-ı Kerim sayfası bitiş",
             'IlmihalIlk': 'İlmihal sayfası başlangıç',
@@ -75,6 +82,9 @@ class Mufredat(forms.ModelForm):
             'Tecvid': 'Tecvid Sualleri',
             'SiyeriNebi': 'Siyer Sualleri',
             'PratikArapca': 'Pratik Arapça Sualleri',
+            'BastanAlaSuresiArasi': "Baştan A'la Suresi Arası",
+            'AlaSuresiLeylSuresiArasi': "A'la Suresi Leyl Suresi Arası",
+            'Dualar': "Dualar",
 
         }
         widgets = {

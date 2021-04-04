@@ -3,323 +3,1114 @@
 {% load static %}
 
 {% block content %}
-    {% if messages %}
-        <div class="container mt-5">
-            <div class="row pt-5">
-                {% for message in messages %}
-                    <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %} alert-dismissible show col-12 "
-                         role="alert">
-                        <p>
-                            {{ message }}
-                        </p>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
 
-                {% endfor %}
-            </div>
-        </div>
-    {% endif %}
-    <main class="page-content mt-5 pt-5">
-        {% if default_degerler %}
-            {% if default_degerler.KURANIKERIM == 'var' %}
-                <div class="card">
-                    <div class="content">
-                        <h2 class="title">Kur'an-ı Kerim</h2>
-                        <p class="copy">Açıklama açıklama açıklama açıklama açıklama açıklama açıklama açıklama
-                            açıklama</p>
-                        <a class="btn" href="{% url 'kiraat' 11 %}">Git</a>
-                    </div>
-                </div>
-            {% endif %}
-        {% endif %}
-        {% if default_degerler %}
-            {% if default_degerler.YasinSuresi == 'var' or default_degerler.MulkSuresi == 'var' or default_degerler.NebeSuresi == 'var' or default_degerler.AlakBeyyineSureleri == 'var' or default_degerler.DuhaSuresininAlti == 'var' or default_degerler.FilSuresininAlti == 'var' or default_degerler.BastanAlaSuresiArasi == 'var' or default_degerler.AlaSuresiLeylSuresiArasi == 'var' %}
-                <div class="card">
-                    <div class="content">
-                        <h2 class="title">Ezber</h2>
-                        <p class="copy">Açıklama açıklama açıklama açıklama açıklama açıklama açıklama açıklama
-                            açıklama</p>
-                        <a class="btn" href="{% url 'ezber' 0 %}">Git</a>
-                    </div>
-                </div>
-            {% endif %}
-        {% endif %}
-        {% if default_degerler %}
-            {% if default_degerler.Tecvid == 'var' %}
-                <div class="card">
-                    <div class="content">
-                        <h2 class="title">Tecvid</h2>
-                        <p class="copy">Açıklama açıklama açıklama açıklama açıklama açıklama açıklama açıklama
-                            açıklama</p>
-                        <a class="btn" href="{% url 'tecvid' 0 %}">Git</a>
-                    </div>
-                </div>
-            {% endif %}
-        {% endif %}
-        {% if default_degerler %}
-            {% if default_degerler.Ilmihal == 'var' %}
-                <div class="card">
-                    <div class="content">
-                        <h2 class="title">İlmihal - Siyer - Dua</h2>
-                        <p class="copy">Açıklama açıklama açıklama açıklama açıklama açıklama açıklama açıklama
-                            açıklama</p>
-                        <a class="btn" href="{% url 'ilmihal_siyer_dua' 0 %}">Git</a>
-                    </div>
-                </div>
-            {% endif %}
-        {% endif %}
-    </main>
-    <style>
-        @import url('https://fonts.googleapis.com/css?family=Cardo:400i|Rubik:400,700&display=swap');
-
-        :root {
-            --d: 700ms;
-            --e: cubic-bezier(0.19, 1, 0.22, 1);
-            --font-sans: 'Rubik', sans-serif;
-            --font-serif: 'Cardo', serif;
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        html, body {
-            height: 100%;
-        }
-
-        body {
-            display: grid;
-            place-items: center;
-        }
-
-        .page-content {
-            display: grid;
-            grid-gap: 1rem;
-            padding: 1rem;
-            max-width: 1024px;
-            margin: 0 auto;
-            font-family: var(--font-sans);
-        }
-
-        @media (min-width: 600px) {
-            .page-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (min-width: 800px) {
-            .page-content {
-                grid-template-columns: repeat(4, 1fr);
-            }
-        }
-
-        .card {
-            position: relative;
-            display: flex;
-            align-items: flex-end;
-            overflow: hidden;
-            padding: 1rem;
-            width: 100%;
-            text-align: center;
-            color: whitesmoke;
-            background-color: whitesmoke;
-            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1), 0 4px 4px rgba(0, 0, 0, 0.1), 0 8px 8px rgba(0, 0, 0, 0.1), 0 16px 16px rgba(0, 0, 0, 0.1);
-        }
-
-        @media (min-width: 600px) {
-            .card {
-                height: 350px;
-            }
-        }
-
-        .card:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 110%;
-            background-size: cover;
-            background-position: 0 0;
-            transition: transform calc(var(--d) * 1.5) var(--e);
-            pointer-events: none;
-        }
-
-        .card:after {
-            content: '';
-            display: block;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 200%;
-            pointer-events: none;
-            background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.009) 11.7%, rgba(0, 0, 0, 0.034) 22.1%, rgba(0, 0, 0, 0.072) 31.2%, rgba(0, 0, 0, 0.123) 39.4%, rgba(0, 0, 0, 0.182) 46.6%, rgba(0, 0, 0, 0.249) 53.1%, rgba(0, 0, 0, 0.320) 58.9%, rgba(0, 0, 0, 0.394) 64.3%, rgba(0, 0, 0, 0.468) 69.3%, rgba(0, 0, 0, 0.540) 74.1%, rgba(0, 0, 0, 0.607) 78.8%, rgba(0, 0, 0, 0.668) 83.6%, rgba(0, 0, 0, 0.721) 88.7%, rgba(0, 0, 0, 0.762) 94.1%, rgba(0, 0, 0, 0.790) 100%);
-            transform: translateY(-50%);
-            transition: transform calc(var(--d) * 2) var(--e);
-        }
-
-        .card:nth-child(1):before {
-            background-image: url(https://images.unsplash.com/photo-1517021897933-0e0319cfbc28?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ);
-        }
-
-        .card:nth-child(2):before {
-            background-image: url(https://images.unsplash.com/photo-1533903345306-15d1c30952de?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ);
-        }
-
-        .card:nth-child(3):before {
-            background-image: url(https://images.unsplash.com/photo-1545243424-0ce743321e11?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ);
-        }
-
-        .card:nth-child(4):before {
-            background-image: url(https://images.unsplash.com/photo-1531306728370-e2ebd9d7bb99?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ);
-        }
-
-        .content {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            padding: 1rem;
-            transition: transform var(--d) var(--e);
-            z-index: 1;
-        }
-
-        .content > * + * {
-            margin-top: 1rem;
-        }
-
-        .title {
-            font-size: 1.3rem;
-            font-weight: bold;
-            line-height: 1.2;
-        }
-
-        .copy {
-            font-family: var(--font-serif);
-            font-size: 1.125rem;
-            font-style: italic;
-            line-height: 1.35;
-        }
-
-        .btn {
-            cursor: pointer;
-            margin-top: 1.5rem;
-            padding: 0.75rem 1.5rem;
-            font-size: 0.65rem;
-            font-weight: bold;
-            letter-spacing: 0.025rem;
-            text-transform: uppercase;
-            color: white;
-            background-color: black;
-            border: none;
-        }
-
-        .btn:hover {
-            background-color: #0d0d0d;
-        }
-
-        .btn:focus {
-            outline: 1px dashed yellow;
-            outline-offset: 3px;
-        }
-
-        @media (hover: hover) and (min-width: 600px) {
-            .card:after {
-                transform: translateY(0);
-            }
-
-            .content {
-                transform: translateY(calc(100% - 4.5rem));
-            }
-
-            .content > *:not(.title) {
-                opacity: 0;
-                transform: translateY(1rem);
-                transition: transform var(--d) var(--e), opacity var(--d) var(--e);
-            }
-
-            .card:hover, .card:focus-within {
-                align-items: center;
-            }
-
-            .card:hover:before, .card:focus-within:before {
-                transform: translateY(-4%);
-            }
-
-            .card:hover:after, .card:focus-within:after {
-                transform: translateY(-50%);
-            }
-
-            .card:hover .content, .card:focus-within .content {
-                transform: translateY(0);
-            }
-
-            .card:hover .content > *:not(.title), .card:focus-within .content > *:not(.title) {
-                opacity: 1;
-                transform: translateY(0);
-                transition-delay: calc(var(--d) / 8);
-            }
-
-            .card:focus-within:before, .card:focus-within:after, .card:focus-within .content, .card:focus-within .content > *:not(.title) {
-                transition-duration: 0s;
-            }
-        }
-
-    </style>
-    <div class="jumbotron-fluid mt-5">
-        <div class="container mb-5">
-            <h1 class="display-4">
-                <center>
-                    <ADKk></ADKk>
-                    ADKkrt
-                </center>
-            </h1>
-            <p class="lead">
-            <center>Kategorini seç, sorun hazır!</center>
-            </p>
-            <div class="text-center"><!-- Button trigger modal -->
-                {% if not user.is_authenticated %}
-                    <button type="button" class="btn btn-outline-success" data-toggle="modal"
-                            data-target="#exampleModal">
-                        Müfredat Oluştur
-                    </button>
-                    <!-- Modal -->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                         aria-labelledby="exampleModalLabel"
-                         aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Müfredat</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
+    <div class="container text-center">
+        <div class="row mt-5">
+            <div class="col-12 mt-5">
+                {% if not kullanici_degerleri %}
+                    <div class="jumbotron-fluid mt-5">
+                        <div class="container">
+                            <h1 class="display-4">
+                                <center>
+                                    <ADKk></ADKk>
+                                    ADKkrt
+                                </center>
+                            </h1>
+                            <p class="lead">
+                            <center>Kategorini seç, sorun hazır!</center>
+                            </p>
+                            <div class="text-center"><!-- Button trigger modal -->
+                                {% if not user.is_authenticated %}
+                                    <button type="button" class="btn btn-outline-success" data-toggle="modal"
+                                            data-target="#exampleModal">
+                                        Müfredat Oluştur
                                     </button>
-                                </div>
-                                <div class="modal-body">
-                                    Giriş yaparsanız kayıtlı müfredatınız kaybolmayacak.
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">İptal
-                                    </button>
-                                    <a href="{% url 'login' %}">
-                                        <button type="button" class="btn btn-primary">Giriş yap</button>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                         aria-labelledby="exampleModalLabel"
+                                         aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Müfredat</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Giriş yaparsanız kayıtlı müfredatınız kaybolmayacak.
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">
+                                                        İptal
+                                                    </button>
+                                                    <a href="{% url 'login' %}">
+                                                        <button type="button" class="btn btn-primary">Giriş yap</button>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <a href="{% url 'mufredat' %}">
+                                        <button type="button" class="btn btn-outline-success">Müfredat Oluştur</button>
                                     </a>
-                                </div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
-                {% else %}
-                    <a href="{% url 'mufredat' %}">
-                        <button type="button" class="btn btn-outline-success">Müfredat Oluştur</button>
-                    </a>
                 {% endif %}
+                {% if kullanici_degerleri %}
+                    <div class="tab-content" id="myTabContent">
+                        {% if default_degerler.KURANIKERIM == 'var' %}
+                            {% if kullanici_degerleri.KURANIKERIM == 'var' %}
+                                <p class="card-text">
+                                <div class="container">
+                                    <head>
+                                        <link rel="preconnect" href="https://fonts.gstatic.com">
+                                        <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap"
+                                              rel="stylesheet">
+                                    </head>
+                                    <body>
+                                    <div class="jumbotron">
+                                        <form action="{% url 'randomsoru' 11 %}" method="post">
+                                            {% csrf_token %}
+                                            <div class="row">
+                                                <div class="input-group mb-3 col-6">
+                                                    <div class="input-group-prepend">
+                                                        <span class="input-group-text" id="basic-addon1">Baş.</span>
+                                                    </div>
+                                                    <input type="text" class="form-control"
+                                                           placeholder="{{ KURANIKERIM_b }}"
+                                                           name="KURANIKERIM_b" value="{{ KURANIKERIM_b }}"
+                                                           aria-label="" aria-describedby="basic-addon1">
+                                                </div>
+                                                <div class="input-group mb-3 col-6">
+                                                    <input type="text" class="form-control"
+                                                           placeholder="{{ KURANIKERIM_s }}"
+                                                           name="KURANIKERIM_s" value="{{ KURANIKERIM_s }}"
+                                                           aria-label="Username" aria-describedby="basic-addon1">
+                                                    <div class="input-group-append">
+                                                        <span class="input-group-text" id="basic-addon1">Bit.</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% if KURANIKERIM_random %}
+                                                <h5 class="Sorular">﴾ {{ KURANIKERIM_random.sure_isim }}
+                                                    - {{ KURANIKERIM_random.ayet_no }} ﴿</h5>
+                                                <h1 class="Sorular">
+                                                    <strong>استعيذ
+                                                        بالله؛ </strong>{{ KURANIKERIM_random.ayet | truncatewords:5 }}
+                                                </h1>
+                                            {% endif %}
+                                            <div class="text-right" style="font-size: 12px">KUR'AN-I KERİM
+                                                - {{ KURANIKERIM_random.sayfa }}</div>
+
+                                            {% if KURANIKERIM_random %}
+                                                <button href="{% url 'randomsoru' 11 %}"
+                                                        class="btn btn btn-outline-info bx-pull-right btn-sm"
+                                                        type="submit">
+                                                    Yenile
+                                                </button>
+                                            {% else %}
+                                                <button href="{% url 'randomsoru' 11 %}"
+                                                        class="btn btn btn-outline-info bx-pull-right btn-sm"
+                                                        type="submit">
+                                                    Başla
+                                                </button>
+
+                                            {% endif %}
+                                        </form>
+                                    </div>
+                                    </body>
+                                </div>
+                                </p>
+
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                    <div class="tab-content" id="myTabContent">
+                        {% if default_degerler.YasinSuresi == 'var' %}
+                            {% if kullanici_degerleri.YasinSuresi == 'var' %}
+                                <p class="card-text">
+                                <div class="container">
+                                    <head>
+                                        <link rel="preconnect" href="https://fonts.gstatic.com">
+                                        <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap"
+                                              rel="stylesheet">
+                                    </head>
+                                    <body>
+                                    <div class="jumbotron">
+                                        {% if YasinSuresi_random %}
+                                            <h1 class="Sorular">
+                                                <strong>استعيذ
+                                                    بالله؛ </strong>
+                                                {{ YasinSuresi_random }}</h1>
+                                        {% endif %}
+                                        <div class="text-right" style="font-size: 12px">Yasin Suresi</div>
+                                        {% if YasinSuresi_random %}
+                                            <a href="{% url 'randomsoru' 1 %}"
+                                               class="btn btn btn-outline-info bx-pull-right btn-sm">Yenile</a>
+                                        {% else %}
+                                            <a href="{% url 'randomsoru' 1 %}"
+                                               class="btn btn btn-outline-info bx-pull-right btn-sm">Başla</a>
+
+                                            </div>
+
+                                            </body>
+                                        {% endif %}
+                                </div>
+                                </p>
+
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                    <div class="tab-content" id="myTabContent">
+                        {% if default_degerler.MulkSuresi == 'var' %}
+                            {% if kullanici_degerleri.MulkSuresi == 'var' %}
+                                <p class="card-text">
+                                <div class="container">
+                                    <head>
+                                        <link rel="preconnect" href="https://fonts.gstatic.com">
+                                        <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap"
+                                              rel="stylesheet">
+                                    </head>
+                                    <body>
+                                    <div class="jumbotron">
+                                        {% if MulkSuresi_random %}
+                                            <h1 class="Sorular">
+                                                <strong>استعيذ
+                                                    بالله؛ </strong>
+                                                {{ MulkSuresi_random }}</h1>
+                                        {% endif %}
+                                        <div class="text-right" style="font-size: 12px">Mülk Suresi</div>
+                                        {% if MulkSuresi_random %}
+                                            <a href="{% url 'randomsoru' 2 %}"
+                                               class="btn btn btn-outline-info bx-pull-right btn-sm">Yenile</a>
+                                        {% else %}
+                                            <a href="{% url 'randomsoru' 2 %}"
+                                               class="btn btn btn-outline-info bx-pull-right btn-sm">Başla</a>
+
+                                            </div>
+
+                                            </body>
+                                        {% endif %}
+                                </div>
+                                </p>
+
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                    <div class="tab-content" id="myTabContent">
+                        {% if default_degerler.NebeSuresi == 'var' %}
+                            {% if kullanici_degerleri.NebeSuresi == 'var' %}
+                                <p class="card-text">
+                                <div class="container">
+                                    <head>
+                                        <link rel="preconnect" href="https://fonts.gstatic.com">
+                                        <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap"
+                                              rel="stylesheet">
+                                    </head>
+                                    <body>
+                                    <div class="jumbotron">
+                                        {% if NebeSuresi_random %}
+                                            <h1 class="Sorular">
+                                                <strong>استعيذ
+                                                    بالله؛ </strong>
+                                                {{ NebeSuresi_random }}</h1>
+                                        {% endif %}
+                                        <div class="text-right" style="font-size: 12px">Nebe Suresi</div>
+                                        {% if NebeSuresi_random %}
+                                            <a href="{% url 'randomsoru' 3 %}"
+                                               class="btn btn btn-outline-info bx-pull-right btn-sm">Yenile</a>
+                                        {% else %}
+                                            <a href="{% url 'randomsoru' 3 %}"
+                                               class="btn btn btn-outline-info bx-pull-right btn-sm">Başla</a>
+
+                                            </div>
+
+                                            </body>
+                                        {% endif %}
+                                </div>
+                                </p>
+
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                    <div class="tab-content" id="myTabContent">
+                        {% if default_degerler.AlakBeyyineSureleri == 'var' %}
+                            {% if kullanici_degerleri.AlakBeyyineSureleri == 'var' %}
+                                <p class="card-text">
+                                <div class="container">
+                                    <head>
+                                        <link rel="preconnect" href="https://fonts.gstatic.com">
+                                        <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap"
+                                              rel="stylesheet">
+                                    </head>
+                                    <body>
+                                    <div class="jumbotron">
+                                        {% if AlakBeyyineSureleri_random %}
+                                            <h5>﴾ {{ AlakBeyyineSureleri_random.sure_isim }} ﴿</h5>
+                                            <h1 class="Sorular">
+
+                                                <strong>استعيذ
+                                                    بالله؛ </strong>
+                                                {{ AlakBeyyineSureleri_random.soru }}</h1>
+                                        {% endif %}
+                                        <div class="text-right" style="font-size: 12px">Alak ve Beyyine Sureleri</div>
+                                        {% if AlakBeyyineSureleri_random %}
+                                            <a href="{% url 'randomsoru' 4 %}"
+                                               class="btn btn btn-outline-info bx-pull-right btn-sm">Yenile</a>
+                                        {% else %}
+                                            <a href="{% url 'randomsoru' 4 %}"
+                                               class="btn btn btn-outline-info bx-pull-right btn-sm">Başla</a>
+
+                                            </div>
+
+                                            </body>
+                                        {% endif %}
+                                </div>
+                                </p>
+
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                    <div class="tab-content" id="myTabContent">
+                        {% if default_degerler.BastanAlaSuresiArasi == 'var' %}
+                            {% if kullanici_degerleri.BastanAlaSuresiArasi == 'var' %}
+                                <p class="card-text">
+                                <div class="container">
+                                    <head>
+                                        <link rel="preconnect" href="https://fonts.gstatic.com">
+                                        <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap"
+                                              rel="stylesheet">
+                                    </head>
+                                    <body>
+                                    <div class="jumbotron">
+                                        {% if BastanAlaSuresiArasi_random %}
+                                            <h5>﴾ {{ BastanAlaSuresiArasi_random.sure_isim }} ﴿</h5>
+                                            <h1 class="Sorular">
+                                                <strong>استعيذ
+                                                    بالله؛ </strong>
+                                                {{ BastanAlaSuresiArasi_random.soru }}</h1>
+                                        {% endif %}
+                                        <div class="text-right" style="font-size: 12px">Baştan A'la Suresi Arası</div>
+                                        {% if BastanAlaSuresiArasi_random %}
+                                            <a href="{% url 'randomsoru' 5 %}"
+                                               class="btn btn btn-outline-info bx-pull-right btn-sm">Yenile</a>
+                                        {% else %}
+                                            <a href="{% url 'randomsoru' 5 %}"
+                                               class="btn btn btn-outline-info bx-pull-right btn-sm">Başla</a>
+
+                                            </div>
+
+                                            </body>
+                                        {% endif %}
+                                </div>
+                                </p>
+
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                    <div class="tab-content" id="myTabContent">
+                        {% if default_degerler.DuhaSuresininAlti == 'var' %}
+                            {% if kullanici_degerleri.DuhaSuresininAlti == 'var' %}
+                                <p class="card-text">
+                                <div class="container">
+                                    <head>
+                                        <link rel="preconnect" href="https://fonts.gstatic.com">
+                                        <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap"
+                                              rel="stylesheet">
+                                    </head>
+                                    <body>
+                                    <div class="jumbotron">
+                                        {% if DuhaSuresininAlti_random %}
+                                            <h5>﴾ {{ DuhaSuresininAlti_random.sure_isim }} ﴿</h5>
+                                            <h1 class="Sorular">
+                                                <strong>استعيذ
+                                                    بالله؛ </strong>
+                                                {{ DuhaSuresininAlti_random.soru }}</h1>
+                                        {% endif %}
+                                        <div class="text-right" style="font-size: 12px">Duha Suresi Altı</div>
+                                        {% if DuhaSuresininAlti_random %}
+                                            <a href="{% url 'randomsoru' 6 %}"
+                                               class="btn btn btn-outline-info bx-pull-right btn-sm">Yenile</a>
+                                        {% else %}
+                                            <a href="{% url 'randomsoru' 6 %}"
+                                               class="btn btn btn-outline-info bx-pull-right btn-sm">Başla</a>
+
+                                            </div>
+
+                                            </body>
+                                        {% endif %}
+                                </div>
+                                </p>
+
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                    <div class="tab-content" id="myTabContent">
+                        {% if default_degerler.FilSuresininAlti == 'var' %}
+                            {% if kullanici_degerleri.FilSuresininAlti == 'var' %}
+                                <p class="card-text">
+                                <div class="container">
+                                    <head>
+                                        <link rel="preconnect" href="https://fonts.gstatic.com">
+                                        <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap"
+                                              rel="stylesheet">
+                                    </head>
+                                    <body>
+                                    <div class="jumbotron">
+                                        {% if FilSuresininAlti_random %}
+                                            <h5>﴾ {{ FilSuresininAlti_random.sure_isim }} ﴿</h5>
+                                            <h1 class="Sorular">
+                                                <strong>استعيذ
+                                                    بالله؛ </strong>
+                                                {{ FilSuresininAlti_random.soru }}</h1>
+                                        {% endif %}
+                                        <div class="text-right" style="font-size: 12px">Fil Suresi Altı</div>
+                                        {% if FilSuresininAlti_random %}
+                                            <a href="{% url 'randomsoru' 7 %}"
+                                               class="btn btn btn-outline-info bx-pull-right btn-sm">Yenile</a>
+                                        {% else %}
+                                            <a href="{% url 'randomsoru' 7 %}"
+                                               class="btn btn btn-outline-info bx-pull-right btn-sm">Başla</a>
+
+                                            </div>
+
+                                            </body>
+                                        {% endif %}
+                                </div>
+                                </p>
+
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                    <div class="tab-content" id="myTabContent">
+                        {% if default_degerler.Tecvid == 'var' %}
+                            {% if kullanici_degerleri.Tecvid == 'var' %}
+                                <p class="card-text">
+                                <div class="container">
+                                    <head>
+                                        <link rel="preconnect" href="https://fonts.gstatic.com">
+                                        <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap"
+                                              rel="stylesheet">
+                                    </head>
+                                    <body>
+                                    <div class="jumbotron">
+                                        {% if Tecvid_random %}
+                                            <h1 class="Sorular">
+                                                {{ Tecvid_random }}</h1>
+                                        {% endif %}
+                                        <div class="text-right" style="font-size: 12px">Tecvid</div>
+                                        {% if Tecvid_random %}
+                                            <a href="{% url 'randomsoru' 8 %}"
+                                               class="btn btn btn-outline-info bx-pull-right btn-sm">Yenile</a>
+                                        {% else %}
+                                            <a href="{% url 'randomsoru' 8 %}"
+                                               class="btn btn btn-outline-info bx-pull-right btn-sm">Başla</a>
+
+                                            </div>
+
+                                            </body>
+                                        {% endif %}
+                                </div>
+                                </p>
+
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                    <div class="tab-content" id="myTabContent">
+                        {% if default_degerler.SiyeriNebi == 'var' %}
+                            {% if kullanici_degerleri.SiyeriNebi == 'var' %}
+                                <p class="card-text">
+                                <div class="container">
+                                    <head>
+                                        <link rel="preconnect" href="https://fonts.gstatic.com">
+                                        <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap"
+                                              rel="stylesheet">
+                                    </head>
+                                    <body>
+                                    <div class="jumbotron">
+                                        {% if SiyeriNebi_random %}
+                                            <h5>﴾ {{ SiyeriNebi_random.sayfa }} ﴿</h5>
+                                            <h1 class="Sorular">
+                                                {{ SiyeriNebi_random.soru }}</h1>
+                                        {% endif %}
+                                        <div class="text-right" style="font-size: 12px">Siyer-i Nebi</div>
+                                        {% if SiyeriNebi_random %}
+                                            <a href="{% url 'randomsoru' 9 %}"
+                                               class="btn btn btn-outline-info bx-pull-right btn-sm">Yenile</a>
+                                        {% else %}
+                                            <a href="{% url 'randomsoru' 9 %}"
+                                               class="btn btn btn-outline-info bx-pull-right btn-sm">Başla</a>
+
+                                            </div>
+
+                                            </body>
+                                        {% endif %}
+                                </div>
+                                </p>
+
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                    <div class="tab-content" id="myTabContent">
+                        {% if default_degerler.AlaSuresiLeylSuresiArasi == 'var' %}
+                            {% if kullanici_degerleri.AlaSuresiLeylSuresiArasi == 'var' %}
+                                <p class="card-text">
+                                <div class="container">
+                                    <head>
+                                        <link rel="preconnect" href="https://fonts.gstatic.com">
+                                        <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap"
+                                              rel="stylesheet">
+                                    </head>
+                                    <body>
+                                    <div class="jumbotron">
+                                        {% if AlaSuresiLeylSuresiArasi_random %}
+                                            <h5>﴾ {{ AlaSuresiLeylSuresiArasi_random.sure_isim }} ﴿</h5>
+                                            <h1 class="Sorular">
+                                                {{ AlaSuresiLeylSuresiArasi_random.soru }}</h1>
+                                        {% endif %}
+                                        <div class="text-right" style="font-size: 12px">A'la Suresi Leyl Suresi Arası
+                                        </div>
+                                        {% if AlaSuresiLeylSuresiArasi_random %}
+                                            <a href="{% url 'randomsoru' 12 %}"
+                                               class="btn btn btn-outline-info bx-pull-right btn-sm">Yenile</a>
+                                        {% else %}
+                                            <a href="{% url 'randomsoru' 12 %}"
+                                               class="btn btn btn-outline-info bx-pull-right btn-sm">Başla</a>
+
+                                            </div>
+
+                                            </body>
+                                        {% endif %}
+                                </div>
+                                </p>
+
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                    <div class="tab-content" id="myTabContent">
+                        {% if default_degerler.Dualar == 'var' %}
+                            {% if kullanici_degerleri.Dualar == 'var' %}
+                                <p class="card-text">
+                                <div class="container">
+                                    <head>
+                                        <link rel="preconnect" href="https://fonts.gstatic.com">
+                                        <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap"
+                                              rel="stylesheet">
+                                    </head>
+                                    <body>
+                                    <div class="jumbotron">
+                                        {% if Dualar_random %}
+                                            <h1 class="Sorular">
+                                                {{ Dualar_random }}</h1>
+                                        {% endif %}
+                                        <div class="text-right" style="font-size: 12px">Dualar</div>
+                                        {% if Dualar_random %}
+                                            <a href="{% url 'randomsoru' 13 %}"
+                                               class="btn btn btn-outline-info bx-pull-right btn-sm">Yenile</a>
+                                        {% else %}
+                                            <a href="{% url 'randomsoru' 13 %}"
+                                               class="btn btn btn-outline-info bx-pull-right btn-sm">Başla</a>
+
+                                            </div>
+
+                                            </body>
+                                        {% endif %}
+                                </div>
+                                </p>
+
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                    <div class="tab-content" id="myTabContent">
+                        {% if default_degerler.Ilmihal == 'var' %}
+                            {% if kullanici_degerleri.Ilmihal == 'var' %}
+                                <p class="card-text">
+                                <div class="container">
+                                    <head>
+                                        <link rel="preconnect" href="https://fonts.gstatic.com">
+                                        <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap"
+                                              rel="stylesheet">
+                                    </head>
+                                    <body>
+                                    <div class="jumbotron">
+                                        {% if Ilmihal_random %}
+                                            <h5>﴾ {{ Ilmihal_random.sayfa }} ﴿</h5>
+                                            <h1 class="Sorular">
+                                                {{ Ilmihal_random.soru }}</h1>
+                                        {% endif %}
+                                        <div class="text-right" style="font-size: 12px">İlmihal</div>
+                                        {% if Ilmihal_random %}
+                                            <a href="{% url 'randomsoru' 14 %}"
+                                               class="btn btn btn-outline-info bx-pull-right btn-sm">Yenile</a>
+                                        {% else %}
+                                            <a href="{% url 'randomsoru' 14 %}"
+                                               class="btn btn btn-outline-info bx-pull-right btn-sm">Başla</a>
+
+                                            </div>
+
+                                            </body>
+                                        {% endif %}
+                                </div>
+                                </p>
+
+                            {% endif %}
+                        {% endif %}
+                    </div>
+
+                {% else %}
+                    <div class="tab-content" id="myTabContent">
+                        {% if default_degerler.KURANIKERIM == 'var' %}
+                            <p class="card-text">
+                            <div class="container">
+                                <head>
+                                    <link rel="preconnect" href="https://fonts.gstatic.com">
+                                    <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap"
+                                          rel="stylesheet">
+                                </head>
+                                <body>
+                                <div class="jumbotron">
+                                    <form action="{% url 'randomsoru' 11 %}" method="post">
+                                        {% csrf_token %}
+                                        <div class="row">
+                                            <div class="input-group mb-3 col-6">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text" id="basic-addon1">Baş.</span>
+                                                </div>
+                                                <input type="text" class="form-control"
+                                                       placeholder="{{ KURANIKERIM_b }}"
+                                                       name="KURANIKERIM_b" value="{{ KURANIKERIM_b }}"
+                                                       aria-label="" aria-describedby="basic-addon1">
+                                            </div>
+                                            <div class="input-group mb-3 col-6">
+                                                <input type="text" class="form-control"
+                                                       placeholder="{{ KURANIKERIM_s }}"
+                                                       name="KURANIKERIM_s" value="{{ KURANIKERIM_s }}"
+                                                       aria-label="Username" aria-describedby="basic-addon1">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text" id="basic-addon1">Bit.</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% if KURANIKERIM_random %}
+                                            <h5 class="Sorular">﴾ {{ KURANIKERIM_random.sure_isim }}
+                                                - {{ KURANIKERIM_random.ayet_no }} ﴿</h5>
+                                            <h1 class="Sorular">
+                                                <strong>استعيذ
+                                                    بالله؛ </strong>{{ KURANIKERIM_random.ayet | truncatewords:5 }}
+                                            </h1>
+                                        {% endif %}
+                                        <div class="text-right" style="font-size: 12px">KUR'AN-I KERİM
+                                            - {{ KURANIKERIM_random.sayfa }}</div>
+
+                                        {% if KURANIKERIM_random %}
+                                            <button href="{% url 'randomsoru' 11 %}"
+                                                    class="btn btn btn-outline-info bx-pull-right btn-sm"
+                                                    type="submit">
+                                                Yenile
+                                            </button>
+                                        {% else %}
+                                            <button href="{% url 'randomsoru' 11 %}"
+                                                    class="btn btn btn-outline-info bx-pull-right btn-sm"
+                                                    type="submit">
+                                                Başla
+                                            </button>
+
+                                        {% endif %}
+                                    </form>
+                                </div>
+                                </body>
+                            </div>
+                            </p>
+
+                        {% endif %}
+                    </div>
+                    <div class="tab-content" id="myTabContent">
+                        {% if default_degerler.YasinSuresi == 'var' %}
+                            <p class="card-text">
+                            <div class="container">
+                                <head>
+                                    <link rel="preconnect" href="https://fonts.gstatic.com">
+                                    <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap"
+                                          rel="stylesheet">
+                                </head>
+                                <body>
+                                <div class="jumbotron">
+                                    {% if YasinSuresi_random %}
+                                        <h1 class="Sorular">
+                                            <strong>استعيذ
+                                                بالله؛ </strong>
+                                            {{ YasinSuresi_random }}</h1>
+                                    {% endif %}
+                                    <div class="text-right" style="font-size: 12px">Yasin Suresi</div>
+                                    {% if YasinSuresi_random %}
+                                        <a href="{% url 'randomsoru' 1 %}"
+                                           class="btn btn btn-outline-info bx-pull-right btn-sm">Yenile</a>
+                                    {% else %}
+                                        <a href="{% url 'randomsoru' 1 %}"
+                                           class="btn btn btn-outline-info bx-pull-right btn-sm">Başla</a>
+
+                                        </div>
+
+                                        </body>
+                                    {% endif %}
+                            </div>
+                            </p>
+
+                        {% endif %}
+                    </div>
+                    <div class="tab-content" id="myTabContent">
+                        {% if default_degerler.MulkSuresi == 'var' %}
+                            <p class="card-text">
+                            <div class="container">
+                                <head>
+                                    <link rel="preconnect" href="https://fonts.gstatic.com">
+                                    <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap"
+                                          rel="stylesheet">
+                                </head>
+                                <body>
+                                <div class="jumbotron">
+                                    {% if MulkSuresi_random %}
+                                        <h1 class="Sorular">
+                                            <strong>استعيذ
+                                                بالله؛ </strong>
+                                            {{ MulkSuresi_random }}</h1>
+                                    {% endif %}
+                                    <div class="text-right" style="font-size: 12px">Mülk Suresi</div>
+                                    {% if MulkSuresi_random %}
+                                        <a href="{% url 'randomsoru' 2 %}"
+                                           class="btn btn btn-outline-info bx-pull-right btn-sm">Yenile</a>
+                                    {% else %}
+                                        <a href="{% url 'randomsoru' 2 %}"
+                                           class="btn btn btn-outline-info bx-pull-right btn-sm">Başla</a>
+
+                                        </div>
+
+                                        </body>
+                                    {% endif %}
+                            </div>
+                            </p>
+
+                        {% endif %}
+                    </div>
+                    <div class="tab-content" id="myTabContent">
+                        {% if default_degerler.NebeSuresi == 'var' %}
+                            <p class="card-text">
+                            <div class="container">
+                                <head>
+                                    <link rel="preconnect" href="https://fonts.gstatic.com">
+                                    <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap"
+                                          rel="stylesheet">
+                                </head>
+                                <body>
+                                <div class="jumbotron">
+                                    {% if NebeSuresi_random %}
+                                        <h1 class="Sorular">
+                                            <strong>استعيذ
+                                                بالله؛ </strong>
+                                            {{ NebeSuresi_random }}</h1>
+                                    {% endif %}
+                                    <div class="text-right" style="font-size: 12px">Nebe Suresi</div>
+                                    {% if NebeSuresi_random %}
+                                        <a href="{% url 'randomsoru' 3 %}"
+                                           class="btn btn btn-outline-info bx-pull-right btn-sm">Yenile</a>
+                                    {% else %}
+                                        <a href="{% url 'randomsoru' 3 %}"
+                                           class="btn btn btn-outline-info bx-pull-right btn-sm">Başla</a>
+
+                                        </div>
+
+                                        </body>
+                                    {% endif %}
+                            </div>
+                            </p>
+
+                        {% endif %}
+                    </div>
+                    <div class="tab-content" id="myTabContent">
+                        {% if default_degerler.AlakBeyyineSureleri == 'var' %}
+                            <p class="card-text">
+                            <div class="container">
+                                <head>
+                                    <link rel="preconnect" href="https://fonts.gstatic.com">
+                                    <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap"
+                                          rel="stylesheet">
+                                </head>
+                                <body>
+                                <div class="jumbotron">
+                                    {% if AlakBeyyineSureleri_random %}
+                                        <h5>﴾ {{ AlakBeyyineSureleri_random.sure_isim }} ﴿</h5>
+                                        <h1 class="Sorular">
+
+                                            <strong>استعيذ
+                                                بالله؛ </strong>
+                                            {{ AlakBeyyineSureleri_random.soru }}</h1>
+                                    {% endif %}
+                                    <div class="text-right" style="font-size: 12px">Alak ve Beyyine Sureleri</div>
+                                    {% if AlakBeyyineSureleri_random %}
+                                        <a href="{% url 'randomsoru' 4 %}"
+                                           class="btn btn btn-outline-info bx-pull-right btn-sm">Yenile</a>
+                                    {% else %}
+                                        <a href="{% url 'randomsoru' 4 %}"
+                                           class="btn btn btn-outline-info bx-pull-right btn-sm">Başla</a>
+
+                                        </div>
+
+                                        </body>
+                                    {% endif %}
+                            </div>
+                            </p>
+
+                        {% endif %}
+                    </div>
+                    <div class="tab-content" id="myTabContent">
+                        {% if default_degerler.BastanAlaSuresiArasi == 'var' %}
+                            <p class="card-text">
+                            <div class="container">
+                                <head>
+                                    <link rel="preconnect" href="https://fonts.gstatic.com">
+                                    <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap"
+                                          rel="stylesheet">
+                                </head>
+                                <body>
+                                <div class="jumbotron">
+                                    {% if BastanAlaSuresiArasi_random %}
+                                        <h5>﴾ {{ BastanAlaSuresiArasi_random.sure_isim }} ﴿</h5>
+                                        <h1 class="Sorular">
+                                            <strong>استعيذ
+                                                بالله؛ </strong>
+                                            {{ BastanAlaSuresiArasi_random.soru }}</h1>
+                                    {% endif %}
+                                    <div class="text-right" style="font-size: 12px">Baştan A'la Suresi Arası</div>
+                                    {% if BastanAlaSuresiArasi_random %}
+                                        <a href="{% url 'randomsoru' 5 %}"
+                                           class="btn btn btn-outline-info bx-pull-right btn-sm">Yenile</a>
+                                    {% else %}
+                                        <a href="{% url 'randomsoru' 5 %}"
+                                           class="btn btn btn-outline-info bx-pull-right btn-sm">Başla</a>
+
+                                        </div>
+
+                                        </body>
+                                    {% endif %}
+                            </div>
+                            </p>
+
+                        {% endif %}
+                    </div>
+                    <div class="tab-content" id="myTabContent">
+                        {% if default_degerler.DuhaSuresininAlti == 'var' %}
+                            <p class="card-text">
+                            <div class="container">
+                                <head>
+                                    <link rel="preconnect" href="https://fonts.gstatic.com">
+                                    <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap"
+                                          rel="stylesheet">
+                                </head>
+                                <body>
+                                <div class="jumbotron">
+                                    {% if DuhaSuresininAlti_random %}
+                                        <h5>﴾ {{ DuhaSuresininAlti_random.sure_isim }} ﴿</h5>
+                                        <h1 class="Sorular">
+                                            <strong>استعيذ
+                                                بالله؛ </strong>
+                                            {{ DuhaSuresininAlti_random.soru }}</h1>
+                                    {% endif %}
+                                    <div class="text-right" style="font-size: 12px">Duha Suresi Altı</div>
+                                    {% if DuhaSuresininAlti_random %}
+                                        <a href="{% url 'randomsoru' 6 %}"
+                                           class="btn btn btn-outline-info bx-pull-right btn-sm">Yenile</a>
+                                    {% else %}
+                                        <a href="{% url 'randomsoru' 6 %}"
+                                           class="btn btn btn-outline-info bx-pull-right btn-sm">Başla</a>
+
+                                        </div>
+
+                                        </body>
+                                    {% endif %}
+                            </div>
+                            </p>
+
+                        {% endif %}
+                    </div>
+                    <div class="tab-content" id="myTabContent">
+                        {% if default_degerler.FilSuresininAlti == 'var' %}
+                            <p class="card-text">
+                            <div class="container">
+                                <head>
+                                    <link rel="preconnect" href="https://fonts.gstatic.com">
+                                    <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap"
+                                          rel="stylesheet">
+                                </head>
+                                <body>
+                                <div class="jumbotron">
+                                    {% if FilSuresininAlti_random %}
+                                        <h5>﴾ {{ FilSuresininAlti_random.sure_isim }} ﴿</h5>
+                                        <h1 class="Sorular">
+                                            <strong>استعيذ
+                                                بالله؛ </strong>
+                                            {{ FilSuresininAlti_random.soru }}</h1>
+                                    {% endif %}
+                                    <div class="text-right" style="font-size: 12px">Fil Suresi Altı</div>
+                                    {% if FilSuresininAlti_random %}
+                                        <a href="{% url 'randomsoru' 7 %}"
+                                           class="btn btn btn-outline-info bx-pull-right btn-sm">Yenile</a>
+                                    {% else %}
+                                        <a href="{% url 'randomsoru' 7 %}"
+                                           class="btn btn btn-outline-info bx-pull-right btn-sm">Başla</a>
+
+                                        </div>
+
+                                        </body>
+                                    {% endif %}
+                            </div>
+                            </p>
+
+                        {% endif %}
+                    </div>
+                    <div class="tab-content" id="myTabContent">
+                        {% if default_degerler.Tecvid == 'var' %}
+                            <p class="card-text">
+                            <div class="container">
+                                <head>
+                                    <link rel="preconnect" href="https://fonts.gstatic.com">
+                                    <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap"
+                                          rel="stylesheet">
+                                </head>
+                                <body>
+                                <div class="jumbotron">
+                                    {% if Tecvid_random %}
+                                        <h1 class="Sorular">
+                                            {{ Tecvid_random }}</h1>
+                                    {% endif %}
+                                    <div class="text-right" style="font-size: 12px">Tecvid</div>
+                                    {% if Tecvid_random %}
+                                        <a href="{% url 'randomsoru' 8 %}"
+                                           class="btn btn btn-outline-info bx-pull-right btn-sm">Yenile</a>
+                                    {% else %}
+                                        <a href="{% url 'randomsoru' 8 %}"
+                                           class="btn btn btn-outline-info bx-pull-right btn-sm">Başla</a>
+
+                                        </div>
+
+                                        </body>
+                                    {% endif %}
+                            </div>
+                            </p>
+
+                        {% endif %}
+                    </div>
+                    <div class="tab-content" id="myTabContent">
+                        {% if default_degerler.SiyeriNebi == 'var' %}
+                            <p class="card-text">
+                            <div class="container">
+                                <head>
+                                    <link rel="preconnect" href="https://fonts.gstatic.com">
+                                    <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap"
+                                          rel="stylesheet">
+                                </head>
+                                <body>
+                                <div class="jumbotron">
+                                    {% if SiyeriNebi_random %}
+                                        <h5>﴾ {{ SiyeriNebi_random.sayfa }} ﴿</h5>
+                                        <h1 class="Sorular">
+                                            {{ SiyeriNebi_random.soru }}</h1>
+                                    {% endif %}
+                                    <div class="text-right" style="font-size: 12px">Siyer-i Nebi</div>
+                                    {% if SiyeriNebi_random %}
+                                        <a href="{% url 'randomsoru' 9 %}"
+                                           class="btn btn btn-outline-info bx-pull-right btn-sm">Yenile</a>
+                                    {% else %}
+                                        <a href="{% url 'randomsoru' 9 %}"
+                                           class="btn btn btn-outline-info bx-pull-right btn-sm">Başla</a>
+
+                                        </div>
+
+                                        </body>
+                                    {% endif %}
+                            </div>
+                            </p>
+
+                        {% endif %}
+                    </div>
+                    <div class="tab-content" id="myTabContent">
+                        {% if default_degerler.AlaSuresiLeylSuresiArasi == 'var' %}
+                            <p class="card-text">
+                            <div class="container">
+                                <head>
+                                    <link rel="preconnect" href="https://fonts.gstatic.com">
+                                    <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap"
+                                          rel="stylesheet">
+                                </head>
+                                <body>
+                                <div class="jumbotron">
+                                    {% if AlaSuresiLeylSuresiArasi_random %}
+                                        <h5>﴾ {{ AlaSuresiLeylSuresiArasi_random.sure_isim }} ﴿</h5>
+                                        <h1 class="Sorular">
+                                            {{ AlaSuresiLeylSuresiArasi_random.soru }}</h1>
+                                    {% endif %}
+                                    <div class="text-right" style="font-size: 12px">A'la Suresi Leyl Suresi Arası
+                                    </div>
+                                    {% if AlaSuresiLeylSuresiArasi_random %}
+                                        <a href="{% url 'randomsoru' 12 %}"
+                                           class="btn btn btn-outline-info bx-pull-right btn-sm">Yenile</a>
+                                    {% else %}
+                                        <a href="{% url 'randomsoru' 12 %}"
+                                           class="btn btn btn-outline-info bx-pull-right btn-sm">Başla</a>
+
+                                        </div>
+
+                                        </body>
+                                    {% endif %}
+                            </div>
+                            </p>
+
+                        {% endif %}
+                    </div>
+                    <div class="tab-content" id="myTabContent">
+                        {% if default_degerler.Dualar == 'var' %}
+                            <p class="card-text">
+                            <div class="container">
+                                <head>
+                                    <link rel="preconnect" href="https://fonts.gstatic.com">
+                                    <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap"
+                                          rel="stylesheet">
+                                </head>
+                                <body>
+                                <div class="jumbotron">
+                                    {% if Dualar_random %}
+                                        <h1 class="Sorular">
+                                            {{ Dualar_random }}</h1>
+                                    {% endif %}
+                                    <div class="text-right" style="font-size: 12px">Dualar</div>
+                                    {% if Dualar_random %}
+                                        <a href="{% url 'randomsoru' 13 %}"
+                                           class="btn btn btn-outline-info bx-pull-right btn-sm">Yenile</a>
+                                    {% else %}
+                                        <a href="{% url 'randomsoru' 13 %}"
+                                           class="btn btn btn-outline-info bx-pull-right btn-sm">Başla</a>
+
+                                        </div>
+
+                                        </body>
+                                    {% endif %}
+                            </div>
+                            </p>
+
+                        {% endif %}
+                    </div>
+                    <div class="tab-content" id="myTabContent">
+                        {% if default_degerler.Ilmihal == 'var' %}
+                            <p class="card-text">
+                            <div class="container">
+                                <head>
+                                    <link rel="preconnect" href="https://fonts.gstatic.com">
+                                    <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap"
+                                          rel="stylesheet">
+                                </head>
+                                <body>
+                                <div class="jumbotron">
+                                    {% if Ilmihal_random %}
+                                        <h5>﴾ {{ Ilmihal_random.sayfa }} ﴿</h5>
+                                        <h1 class="Sorular">
+                                            {{ Ilmihal_random.soru }}</h1>
+                                    {% endif %}
+                                    <div class="text-right" style="font-size: 12px">İlmihal</div>
+                                    {% if Ilmihal_random %}
+                                        <a href="{% url 'randomsoru' 14 %}"
+                                           class="btn btn btn-outline-info bx-pull-right btn-sm">Yenile</a>
+                                    {% else %}
+                                        <a href="{% url 'randomsoru' 14 %}"
+                                           class="btn btn btn-outline-info bx-pull-right btn-sm">Başla</a>
+
+                                        </div>
+
+                                        </body>
+                                    {% endif %}
+                            </div>
+                            </p>
+
+                        {% endif %}
+                    </div>
+                {% endif %}
+
+                <style>
+                    /***
+                Bootstrap4 Card with Tabs by @mdeuerlein
+                ***/
+
+                    body {
+                        background-color: #f7f8f9;
+                    }
+
+                    .card {
+                        background-color: #ffffff;
+                        border: 1px solid rgba(0, 34, 51, 0.1);
+                        box-shadow: 2px 4px 10px 0 rgba(0, 34, 51, 0.05), 2px 4px 10px 0 rgba(0, 34, 51, 0.05);
+                        border-radius: 0.15rem;
+                    }
+
+                    /* Tabs Card */
+
+                    .tab-card {
+                        border: 1px solid #eee;
+                    }
+
+                    .tab-card-header {
+                        background: none;
+                    }
+
+                    /* Default mode */
+                    .tab-card-header > .nav-tabs {
+                        border: none;
+                        margin: 0px;
+                    }
+
+                    .tab-card-header > .nav-tabs > li {
+                        margin-right: 2px;
+                    }
+
+                    .tab-card-header > .nav-tabs > li > a {
+                        border: 0;
+                        border-bottom: 2px solid transparent;
+                        margin-right: 0;
+                        color: #737373;
+                        padding: 2px 15px;
+                    }
+
+                    .tab-card-header > .nav-tabs > li > a.show {
+                        border-bottom: 2px solid #007bff;
+                        color: #007bff;
+                    }
+
+                    .tab-card-header > .nav-tabs > li > a:hover {
+                        color: #007bff;
+                    }
+
+                    .tab-card-header > .tab-content {
+                        padding-bottom: 0;
+                    }
+
+                    .Sorular {
+                        line-height: 60px;
+                        font-size: 30px;
+                        font-family: 'Amiri', serif;
+                    }
+
+                    @media only screen and (max-width: 1000px) {
+                        .Sorular {
+                            line-height: 60px;
+                            font-size: 18px;
+                            font-family: 'Amiri', serif;
+                        }
+                    }
+                </style>
             </div>
         </div>
     </div>
-
-
 {% endblock %}

@@ -205,6 +205,12 @@ def tecvid(request, randomsoru=0):
 
 
 @login_required
+def kategoriler(request):
+    context = dict()
+    return render(request, 'index/kategoriler.html')
+
+
+@login_required
 def ilmihal_siyer_dua(request, randomsoru=0):
     context = dict()
     context['default_degerler'] = DefaultDegerler.objects.last()
@@ -221,6 +227,7 @@ def ilmihal_siyer_dua(request, randomsoru=0):
 def index(request, randomsoru=0):
     context = dict()
     context['default_degerler'] = DefaultDegerler.objects.last()
+    context['kullanici_degerleri'] = Kullanicilar.objects.filter(user=request.user).last()
     if randomsoru == 1:
         context['YasinSuresi_random'] = YasinSuresi.objects.order_by('?')[0].soru
     elif randomsoru == 2:

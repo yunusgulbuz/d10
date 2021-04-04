@@ -25,7 +25,7 @@
             <label for="password">Yeniden Şifre</label>
         </div>
         <button class="form-button" onclick="" type="submit">ONAYLA</button>
-        <a class="mt-5" href="{% url 'login' %}">Giriş Yap</a>
+        <a class="mt-5" href="{% url 'login' %}" style="color: white">Giriş Yap</a>
     </form>
 </div>
 
@@ -130,15 +130,21 @@
     #mainButton.active {
         box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
     }
-
     #mainButton.active .modal {
         -webkit-transform: scale(1, 1);
         -moz-transform: scale(1, 1);
         -ms-transform: scale(1, 1);
         -o-transform: scale(1, 1);
-        transform: scale(1, 1);
     }
-
+@media only screen and (max-width: 1000px) {
+    #mainButton.active .modal {
+        -webkit-transform: scale(1, 1);
+        -moz-transform: scale(1, 1);
+        -ms-transform: scale(1, 1);
+        -o-transform: scale(1, 1);
+        transform: scale(2, 2);
+    }
+}
     #mainButton .modal {
         top: 0;
         left: 0;
@@ -153,7 +159,7 @@
         flex-direction: column;
         background-color: inherit;
         transform-origin: center center;
-        background-image: linear-gradient(to top left, #00a7ee 10%, #5cf 65%, white 200%);
+        background-image: linear-gradient(to top left, #00a7ee 10%, #154c79 65%, white 200%);
         -webkit-transform: scale(0.000001, 0.00001);
         -moz-transform: scale(0.000001, 0.00001);
         -ms-transform: scale(0.000001, 0.00001);
@@ -298,12 +304,6 @@
         }
     });
 </script>
-
-
-
-
-
-
 
 
 

@@ -11,73 +11,108 @@ MESSAGE_STATUS = (
 
 class Kullanicilar(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
+    KURANIKERIMSayfaIlk = models.SmallIntegerField("KUR'AN-I KERİM Başlangıç Sayfası", default=0, blank=True,null=True)
+    KURANIKERIMSayfaSon = models.SmallIntegerField("KUR'AN-I KERİM Bitiş Sayfası", default=600, blank=True,null=True)
+    IlmihalIlk = models.SmallIntegerField("İlmihal Başlangıç Sayfası", blank=True, default=0,null=True)
+    IlmihalSon = models.SmallIntegerField("İlmihal Bitiş Sayfası", blank=True,default=248,null=True)
+    KURANIKERIM = models.CharField("KUR'AN-I KERİM",
+                                   max_length=25,
+                                   choices=MESSAGE_STATUS,
+                                   default='var',
+                                   blank=False,
+                                   null=False,
+                                   )
+    Ilmihal = models.CharField("İlmihal",
+                               max_length=25,
+                               choices=MESSAGE_STATUS,
+                               default='var',
+                               blank=False,
+                               null=False,
+                               )
     YasinSuresi = models.CharField("Yasin Suresi",
                                    max_length=25,
                                    choices=MESSAGE_STATUS,
                                    default='var',
-                                   blank=True,
-                                   null=True,
+                                   blank=False,
+                                   null=False,
                                    )
     MulkSuresi = models.CharField("Mülk Suresi",
                                   max_length=25,
                                   choices=MESSAGE_STATUS,
                                   default='var',
-                                  blank=True,
-                                  null=True,
+                                  blank=False,
+                                  null=False,
                                   )
     NebeSuresi = models.CharField("Nebe Suresi",
                                   max_length=25,
                                   choices=MESSAGE_STATUS,
                                   default='var',
-                                  blank=True,
-                                  null=True,
+                                  blank=False,
+                                  null=False,
                                   )
     AlakBeyyineSureleri = models.CharField("Alak-Beyyine Sureleri",
                                            max_length=25,
                                            choices=MESSAGE_STATUS,
                                            default='var',
-                                           blank=True,
-                                           null=True,
+                                           blank=False,
+                                           null=False,
                                            )
     DuhaSuresininAlti = models.CharField("Duha Suresi'nin Altındaki Sureler",
                                          max_length=25,
                                          choices=MESSAGE_STATUS,
                                          default='var',
-                                         blank=True,
-                                         null=True,
+                                         blank=False,
+                                         null=False,
                                          )
     FilSuresininAlti = models.CharField("Fil Suresi'nin Altındaki Sureler",
                                         max_length=25,
                                         choices=MESSAGE_STATUS,
                                         default='var',
-                                        blank=True,
-                                        null=True,
+                                        blank=False,
+                                        null=False,
                                         )
     Tecvid = models.CharField("Tecvid",
                               max_length=25,
                               choices=MESSAGE_STATUS,
                               default='var',
-                              blank=True,
-                              null=True,
+                              blank=False,
+                              null=False,
                               )
     SiyeriNebi = models.CharField("Siyer-i Nebi",
                                   max_length=25,
                                   choices=MESSAGE_STATUS,
                                   default='var',
-                                  blank=True,
-                                  null=True,
+                                  blank=False,
+                                  null=False,
                                   )
     PratikArapca = models.CharField("Pratik Arapça",
                                     max_length=25,
                                     choices=MESSAGE_STATUS,
                                     default='var',
-                                    blank=True,
-                                    null=True,
+                                    blank=False,
+                                    null=False,
                                     )
-    KURANIKERIMSayfaIlk = models.SmallIntegerField("KUR'AN-I KERİM Başlangıç Sayfası", blank=True, null=True, default=1)
-    KURANIKERIMSayfaSon = models.SmallIntegerField("KUR'AN-I KERİM Bitiş Sayfası", blank=True, null=True, default=600)
-    IlmihalIlk = models.SmallIntegerField("İlmihal Başlangıç Sayfası", blank=True, null=True, default=0)
-    IlmihalSon = models.SmallIntegerField("İlmihal Bitiş Sayfası", blank=True, null=True, default=100)
+    BastanAlaSuresiArasi = models.CharField("Baştan A'la Suresine Kadar Olan Sureler",
+                                            max_length=25,
+                                            choices=MESSAGE_STATUS,
+                                            default='var',
+                                            blank=False,
+                                            null=False,
+                                            )
+    AlaSuresiLeylSuresiArasi = models.CharField("A'la Suresi Leyl Suresi Arası Sureler",
+                                                max_length=25,
+                                                choices=MESSAGE_STATUS,
+                                                default='var',
+                                                blank=False,
+                                                null=False,
+                                                )
+    Dualar = models.CharField("Dualar",
+                              max_length=25,
+                              choices=MESSAGE_STATUS,
+                              default='var',
+                              blank=False,
+                              null=False,
+                              )
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
