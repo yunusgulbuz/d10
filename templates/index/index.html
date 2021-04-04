@@ -104,9 +104,12 @@
                                                     <strong>استعيذ
                                                         بالله؛ </strong>{{ KURANIKERIM_random.ayet | truncatewords:5 }}
                                                 </h1>
+                                                <div class="text-right" style="font-size: 20px">ص
+                                                    - {{ KURANIKERIM_random.sayfa }}  </div>
+                                            {% else %}
+                                                <div class="text-right" style="font-size: 12px">KUR'AN-I KERİM</div>
                                             {% endif %}
-                                            <div class="text-right" style="font-size: 12px">KUR'AN-I KERİM
-                                                - {{ KURANIKERIM_random.sayfa }}</div>
+
 
                                             {% if KURANIKERIM_random %}
                                                 <button href="{% url 'randomsoru' 11 %}"
