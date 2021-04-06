@@ -11,10 +11,10 @@ MESSAGE_STATUS = (
 
 class Kullanicilar(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
-    KURANIKERIMSayfaIlk = models.SmallIntegerField("KUR'AN-I KERİM Başlangıç Sayfası", default=0, blank=True,null=True)
-    KURANIKERIMSayfaSon = models.SmallIntegerField("KUR'AN-I KERİM Bitiş Sayfası", default=600, blank=True,null=True)
-    IlmihalIlk = models.SmallIntegerField("İlmihal Başlangıç Sayfası", blank=True, default=0,null=True)
-    IlmihalSon = models.SmallIntegerField("İlmihal Bitiş Sayfası", blank=True,default=248,null=True)
+    KURANIKERIMSayfaIlk = models.SmallIntegerField("KUR'AN-I KERİM Başlangıç Sayfası", default=0, blank=True, null=True)
+    KURANIKERIMSayfaSon = models.SmallIntegerField("KUR'AN-I KERİM Bitiş Sayfası", default=600, blank=True, null=True)
+    IlmihalIlk = models.SmallIntegerField("İlmihal Başlangıç Sayfası", blank=True, default=0, null=True)
+    IlmihalSon = models.SmallIntegerField("İlmihal Bitiş Sayfası", blank=True, default=248, null=True)
     KURANIKERIM = models.CharField("KUR'AN-I KERİM",
                                    max_length=25,
                                    choices=MESSAGE_STATUS,
@@ -285,12 +285,18 @@ class s_Yasin(models.Model):
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return f"Kullanıcı : {self.kullanici_id.user.username},   Soru : {self.yasin_id.soru}"
+
 
 class s_Mulk(models.Model):
     Mulk_id = models.ForeignKey(MulkSuresi, blank=False, null=False, on_delete=models.CASCADE)
     kullanici_id = models.ForeignKey(Kullanicilar, blank=False, null=False, on_delete=models.CASCADE)
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Kullanıcı : {self.kullanici_id.user.username},   Ayet-i Kerime : {self.Mulk_id.soru}"
 
 
 class s_Nebe(models.Model):
@@ -299,12 +305,18 @@ class s_Nebe(models.Model):
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return f"Kullanıcı : {self.kullanici_id.user.username},   Ayet-i Kerime : {self.Nebe_id.soru}"
+
 
 class s_ilmihal(models.Model):
     ilmihal_id = models.ForeignKey(Ilmihal, blank=False, null=False, on_delete=models.CASCADE)
     kullanici_id = models.ForeignKey(Kullanicilar, blank=False, null=False, on_delete=models.CASCADE)
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Kullanıcı : {self.kullanici_id.user.username},   Soru : {self.ilmihal_id.soru}"
 
 
 class s_siyer(models.Model):
@@ -313,12 +325,18 @@ class s_siyer(models.Model):
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        return f"Kullanıcı : {self.kullanici_id.user.username},   Soru : {self.siyer_id.soru}"
+
 
 class s_tecvid(models.Model):
     tecvid_id = models.ForeignKey(Tecvid, blank=False, null=False, on_delete=models.CASCADE)
     kullanici_id = models.ForeignKey(Kullanicilar, blank=False, null=False, on_delete=models.CASCADE)
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Kullanıcı : {self.kullanici_id.user.username},   Soru : {self.tecvid_id.soru}"
 
 
 class s_parapca(models.Model):

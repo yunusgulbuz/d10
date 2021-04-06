@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import Mufredat
 from .models import Kullanicilar, DefaultDegerler, KURANIKERIM, SiyeriNebi, YasinSuresi, MulkSuresi, NebeSuresi, Tecvid, \
     FilSuresiNasSuresiArasi, AlakBeyyineSureleri, DuhaSuresiHumezeSuresiArasi, KullaniciHesaplari, BastanAlaSuresiArasi, \
-    AlaSuresiLeylSuresiArasi, Dualar, Ilmihal
+    AlaSuresiLeylSuresiArasi, Dualar, Ilmihal, s_tecvid, s_Yasin, s_siyer, s_ilmihal
 from django.contrib.auth.models import User
 from django.contrib import messages, auth
 import pandas as pd
@@ -198,9 +198,23 @@ def ezber(request, randomsoru=0):
 @login_required
 def tecvid(request, randomsoru=0):
     context = dict()
-
+    if not Kullanicilar.objects.filter(user=request.user):
+        kullanici = Kullanicilar.objects.create(user=request.user)
+    else:
+        kullanici = Kullanicilar.objects.get(user=request.user)
     if randomsoru == 8:
-        context['Tecvid_random'] = Tecvid.objects.order_by('?')[0].soru
+        while True:
+            context['Tecvid_random'] = Tecvid.objects.order_by('?')[0]
+            if not s_tecvid.objects.filter(kullanici_id=kullanici, tecvid_id=context['Tecvid_random']):
+                if len(s_tecvid.objects.filter(kullanici_id=kullanici)) > 4:
+                    s_tecvid.objects.create(kullanici_id=kullanici, tecvid_id=context['Tecvid_random'])
+                    s_tecvid.objects.filter(kullanici_id=kullanici).first().delete()
+                    break
+                else:
+                    s_tecvid.objects.create(kullanici_id=kullanici, tecvid_id=context['Tecvid_random'])
+                    break
+            else:
+                context['Tecvid_random'] = Tecvid.objects.order_by('?')[0]
     return render(request, 'index/tecvid.html', context)
 
 
@@ -214,22 +228,64 @@ def kategoriler(request):
 def ilmihal_siyer_dua(request, randomsoru=0):
     context = dict()
     context['default_degerler'] = DefaultDegerler.objects.last()
+    if not Kullanicilar.objects.filter(user=request.user):
+        kullanici = Kullanicilar.objects.create(user=request.user)
+    else:
+        kullanici = Kullanicilar.objects.get(user=request.user)
     if randomsoru == 9:
-        context['SiyeriNebi_random'] = SiyeriNebi.objects.order_by('?')[0]
+        while True:
+            context['SiyeriNebi_random'] = SiyeriNebi.objects.order_by('?')[0]
+            if not s_siyer.objects.filter(kullanici_id=kullanici, siyer_id=context['SiyeriNebi_random']):
+                if len(s_siyer.objects.filter(kullanici_id=kullanici)) > 4:
+                    s_siyer.objects.create(kullanici_id=kullanici, siyer_id=context['SiyeriNebi_random'])
+                    s_siyer.objects.filter(kullanici_id=kullanici).first().delete()
+                    break
+                else:
+                    s_siyer.objects.create(kullanici_id=kullanici, siyer_id=context['SiyeriNebi_random'])
+                    break
+            else:
+                context['SiyeriNebi_random'] = SiyeriNebi.objects.order_by('?')[0]
     elif randomsoru == 13:
         context['Dualar_random'] = Dualar.objects.order_by('?')[0].soru
     elif randomsoru == 14:
-        context['Ilmihal_random'] = Ilmihal.objects.order_by('?')[0]
+        while True:
+            context['Ilmihal_random'] = Ilmihal.objects.order_by('?')[0]
+            if not s_ilmihal.objects.filter(kullanici_id=kullanici, ilmihal_id=context['Ilmihal_random']):
+                if len(s_ilmihal.objects.filter(kullanici_id=kullanici)) > 4:
+                    s_ilmihal.objects.create(kullanici_id=kullanici, ilmihal_id=context['Ilmihal_random'])
+                    s_ilmihal.objects.filter(kullanici_id=kullanici).first().delete()
+                    break
+                else:
+                    s_ilmihal.objects.create(kullanici_id=kullanici, ilmihal_id=context['Ilmihal_random'])
+                    break
+            else:
+                context['Ilmihal_random'] = Ilmihal.objects.order_by('?')[0]
     return render(request, 'index/ilmihal_siyer_dua.html', context)
 
 
 @login_required
 def index(request, randomsoru=0):
+    if not Kullanicilar.objects.filter(user=request.user):
+        kullanici = Kullanicilar.objects.create(user=request.user)
+    else:
+        kullanici = Kullanicilar.objects.get(user=request.user)
+
     context = dict()
     context['default_degerler'] = DefaultDegerler.objects.last()
     context['kullanici_degerleri'] = Kullanicilar.objects.filter(user=request.user).last()
     if randomsoru == 1:
-        context['YasinSuresi_random'] = YasinSuresi.objects.order_by('?')[0].soru
+        while True:
+            context['YasinSuresi_random'] = YasinSuresi.objects.order_by('?')[0]
+            if not s_Yasin.objects.filter(kullanici_id=kullanici, yasin_id=context['YasinSuresi_random']):
+                if len(s_Yasin.objects.filter(kullanici_id=kullanici)) > 4:
+                    s_Yasin.objects.create(kullanici_id=kullanici, yasin_id=context['YasinSuresi_random'])
+                    s_Yasin.objects.filter(kullanici_id=kullanici).first().delete()
+                    break
+                else:
+                    s_Yasin.objects.create(kullanici_id=kullanici, yasin_id=context['YasinSuresi_random'])
+                    break
+            else:
+                context['Tecvid_random'] = Tecvid.objects.order_by('?')[0]
     elif randomsoru == 2:
         context['MulkSuresi_random'] = MulkSuresi.objects.order_by('?')[0].soru
     elif randomsoru == 3:
@@ -243,9 +299,32 @@ def index(request, randomsoru=0):
     elif randomsoru == 7:
         context['FilSuresininAlti_random'] = FilSuresiNasSuresiArasi.objects.order_by('?')[0]
     elif randomsoru == 8:
-        context['Tecvid_random'] = Tecvid.objects.order_by('?')[0].soru
+        while True:
+            context['Tecvid_random'] = Tecvid.objects.order_by('?')[0]
+            if not s_tecvid.objects.filter(kullanici_id=kullanici, tecvid_id=context['Tecvid_random']):
+                if len(s_tecvid.objects.filter(kullanici_id=kullanici)) > 4:
+                    s_tecvid.objects.create(kullanici_id=kullanici, tecvid_id=context['Tecvid_random'])
+                    s_tecvid.objects.filter(kullanici_id=kullanici).first().delete()
+                    break
+                else:
+                    s_tecvid.objects.create(kullanici_id=kullanici, tecvid_id=context['Tecvid_random'])
+                    break
+            else:
+                context['Tecvid_random'] = Tecvid.objects.order_by('?')[0]
     elif randomsoru == 9:
-        context['SiyeriNebi_random'] = SiyeriNebi.objects.order_by('?')[0]
+        while True:
+            context['SiyeriNebi_random'] = SiyeriNebi.objects.order_by('?')[0]
+            if not s_siyer.objects.filter(kullanici_id=kullanici, siyer_id=context['SiyeriNebi_random']):
+                if len(s_siyer.objects.filter(kullanici_id=kullanici)) > 4:
+                    s_siyer.objects.create(kullanici_id=kullanici, siyer_id=context['SiyeriNebi_random'])
+                    s_siyer.objects.filter(kullanici_id=kullanici).first().delete()
+                    break
+                else:
+                    s_siyer.objects.create(kullanici_id=kullanici, siyer_id=context['SiyeriNebi_random'])
+                    break
+            else:
+                context['SiyeriNebi_random'] = SiyeriNebi.objects.order_by('?')[0]
+
     elif randomsoru == 10:
         return  # p_arapca
     elif randomsoru == 11:
@@ -312,7 +391,18 @@ def index(request, randomsoru=0):
     elif randomsoru == 13:
         context['Dualar_random'] = Dualar.objects.order_by('?')[0].soru
     elif randomsoru == 14:
-        context['Ilmihal_random'] = Ilmihal.objects.order_by('?')[0]
+        while True:
+            context['Ilmihal_random'] = Ilmihal.objects.order_by('?')[0]
+            if not s_ilmihal.objects.filter(kullanici_id=kullanici, ilmihal_id=context['Ilmihal_random']):
+                if len(s_ilmihal.objects.filter(kullanici_id=kullanici)) > 4:
+                    s_ilmihal.objects.create(kullanici_id=kullanici, ilmihal_id=context['Ilmihal_random'])
+                    s_ilmihal.objects.filter(kullanici_id=kullanici).first().delete()
+                    break
+                else:
+                    s_ilmihal.objects.create(kullanici_id=kullanici, ilmihal_id=context['Ilmihal_random'])
+                    break
+            else:
+                context['Ilmihal_random'] = Ilmihal.objects.order_by('?')[0]
     else:
         if request.user.is_authenticated:
             if Kullanicilar.objects.filter(user=request.user):

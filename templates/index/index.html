@@ -150,7 +150,7 @@
                                             <h1 class="Sorular">
                                                 <strong>استعيذ
                                                     بالله؛ </strong>
-                                                {{ YasinSuresi_random }}</h1>
+                                                {{ YasinSuresi_random.soru }}</h1>
                                         {% endif %}
                                         <div class="text-right" style="font-size: 12px">Yasin Suresi</div>
                                         {% if YasinSuresi_random %}
@@ -405,7 +405,7 @@
                                     <div class="jumbotron">
                                         {% if Tecvid_random %}
                                             <h1 class="Sorular">
-                                                {{ Tecvid_random }}</h1>
+                                                {{ Tecvid_random.soru }}</h1>
                                         {% endif %}
                                         <div class="text-right" style="font-size: 12px">Tecvid</div>
                                         {% if Tecvid_random %}
@@ -601,15 +601,17 @@
                                             </div>
                                         </div>
                                         {% if KURANIKERIM_random %}
-                                            <h5 class="Sorular">﴾ {{ KURANIKERIM_random.sure_isim }}
-                                                - {{ KURANIKERIM_random.ayet_no }} ﴿</h5>
-                                            <h1 class="Sorular">
-                                                <strong>استعيذ
-                                                    بالله؛ </strong>{{ KURANIKERIM_random.ayet | truncatewords:5 }}
-                                            </h1>
-                                        {% endif %}
-                                        <div class="text-right" style="font-size: 12px">KUR'AN-I KERİM
-                                            - {{ KURANIKERIM_random.sayfa }}</div>
+                                                <h5 class="Sorular">﴾ {{ KURANIKERIM_random.sure_isim }}
+                                                    - {{ KURANIKERIM_random.ayet_no }} ﴿</h5>
+                                                <h1 class="Sorular">
+                                                    <strong>استعيذ
+                                                        بالله؛ </strong>{{ KURANIKERIM_random.ayet | truncatewords:5 }}
+                                                </h1>
+                                                <div class="text-right" style="font-size: 20px">ص
+                                                    - {{ KURANIKERIM_random.sayfa }}  </div>
+                                            {% else %}
+                                                <div class="text-right" style="font-size: 12px">KUR'AN-I KERİM</div>
+                                            {% endif %}
 
                                         {% if KURANIKERIM_random %}
                                             <button href="{% url 'randomsoru' 11 %}"
