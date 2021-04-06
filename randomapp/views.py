@@ -45,14 +45,7 @@ class RegisterUser(SuccessMessageMixin, FormView):
     success_message = 'Başarıyla kayıt oldunuz! Ancak giriş yapmadan önce hesabınızı etkinleştirin!'
 
     def form_valid(self, form):
-        user = form.save(commit=False)
-        if KullaniciHesaplari.objects.filter(email=user.email):
-            user.save()
-            hesap = KullaniciHesaplari.objects.filter(email=user.email).last()
-            main_user = User.objects.get(email=hesap.email)
-            main_user.set_password(hesap.sifre)
-            main_user.save()
-
+        user = form.save(commit=True)
         mail_subject = 'Mail adresinize gelen aktivasyon linkine tıklayın daha sonra giriş yapın.'
         current_site = get_current_site(self.request)
         uid = urlsafe_base64_encode(force_bytes(user.pk))
@@ -88,6 +81,8 @@ class ActivateView(View):
             user = None
         if user is not None and account_activate_token.check_token(user=user, token=token):
             user.is_active = True
+            hesap = KullaniciHesaplari.objects.filter(email=user.email).last()
+            user.set_password(hesap.sifre)
             user.save()
             login(request=request, user=user)
             messages.add_message(request, messages.INFO, 'Hesabınız başarıyla aktifleştirildi.')
