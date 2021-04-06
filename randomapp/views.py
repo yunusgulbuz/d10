@@ -45,7 +45,10 @@ class RegisterUser(SuccessMessageMixin, FormView):
     success_message = 'Başarıyla kayıt oldunuz! Ancak giriş yapmadan önce hesabınızı etkinleştirin!'
 
     def form_valid(self, form):
-        user = form.save(commit=True)
+        if KullaniciHesaplari.objects.filter(email=form.clean_email()):
+            user = form.save(commit=True)
+        else:
+            user = form.save(commit=False)
         mail_subject = 'Mail adresinize gelen aktivasyon linkine tıklayın daha sonra giriş yapın.'
         current_site = get_current_site(self.request)
         uid = urlsafe_base64_encode(force_bytes(user.pk))
